@@ -529,3 +529,9 @@ Déploiement : `docker compose -f docker-compose.dev.yml build web` puis `up -d 
 - Titre de section « Six façons de progresser » → « La carte des territoires ».
 - ATTENTION : `.atelier-domains`/`.atelier-domain`/`.domain-symbol` conservés dans french-workshop.css car math-library.tsx les utilise toujours.
 - Backups : manual/2026-09-12-carte-francais + chiffrée 20260912T211816Z-653276. Typecheck OK, vitest 17/17. Vérifs : /connexion 200, /carte-francais.webp 200, chunk 24yh63epdoxj7.js contient map-island + carte-francais.webp, CSS 11i_4_-czci5j.css contient atelier-domains restauré.
+
+### 2026-09-12 (14) — Tuiles d iles compactes (bibliotheque francais)
+- La grande carte (carte-francais.webp ~550px de haut) remplacee par une rangee compacte de 6 tuiles cliquables (~135px de haut), une par territoire, extraitees de la meme image : public/carte-ile-{grammaire,conjugaison,orthographe,lexique,lecture,ecriture}.webp.
+- Chaque tuile : cadre blanc arrondi style cartouche, filtre identique a l ancien selecteur, etiquette au survol (titre + verbe + nb lecons), tuile active bordure doree, grille 6/3/2 colonnes selon 1100/650px (memes points de rupture que les anciennes cartouches).
+- Retires : .atelier-map, .map-island, .map-chips (chips mobiles devenues inutiles). carte-francais.webp conserve dans public/ (source des tuiles, rollback possible).
+- Backups : manual/2026-09-12-tuiles-iles + chiffree. Typecheck OK, vitest 17/17. Verifs : 6 x /carte-ile-*.webp 200, chunk 1z73x0bvach4h.js (carte-ile- + atelier-islands, map-island absent), CSS 2ry17_-9_e_k2.css.
