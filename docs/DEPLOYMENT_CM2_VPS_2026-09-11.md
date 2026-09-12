@@ -507,3 +507,10 @@ Déploiement : `docker compose -f docker-compose.dev.yml build web` puis `up -d 
 - **Sauvegardes** : backups/manual/2026-09-12-retrait-fluence/ (math-library.tsx 12 194 o, math-workshop.css 4 686 o, subject-banner.tsx 2 213 o) ; sauvegarde chiffrée educapilote-20260912T191607Z-4190481.sql.gz.age.
 - **Chaîne** : scp + md5 conformes (3 fichiers) ; typecheck OK ; vitest 17/17 (3 fichiers) ; build web + up -d --no-deps web.
 - **Vérifications** : aucun chunk JS servi sur 127.0.0.1:18088 (/ et /connexion, tous les /_next/static/chunks/*.js référencés greppés) ne contient « fluence » ; /app/.next/static du conteneur propre (le répertoire .next de l'hôte VPS est un vestige de build local non servi, il contient encore les anciens chunks) ; https://boostclasse.com/connexion 200.
+
+### 2026-09-12 (11) — Page de connexion : trois cartouches
+- Demande utilisateur : placer la bannière Minecraft de /eleve sur /connexion et présenter le panneau gauche en trois cartouches.
+- connexion/page.tsx : .login-path (3 tuiles icônes) et .login-photo (polaroïde seul) remplacés par .login-cartouches — 3 cartes inclinées reliées de pointillés : /banner-eleve.webp (bannière Minecraft), /login-badge.webp (emblème, carte carrée), /banner-sciences.jpg (laboratoire), chacune avec pastille icône (BookOpen, Compass, Flower2) en bas à droite.
+- globals.css : règles .login-path/.login-photo retirées, règles .login-cartouches/.login-cartouche ajoutées ; à ≤760 px la bande est masquée comme avant (login-foot inclus).
+- Sauvegardes : manual/2026-09-12-cartouches-login (page.tsx, globals.css) + chiffrée 20260912T192955Z-73101.
+- Vérifs : typecheck OK ; vitest 17/17 ; /connexion 200 avec 3 .login-cartouche et les 3 images ; assets 200 ; plus aucune classe login-path/login-photo servie ; https://boostclasse.com/connexion 200.
