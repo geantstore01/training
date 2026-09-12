@@ -522,3 +522,10 @@ Déploiement : `docker compose -f docker-compose.dev.yml build web` puis `up -d 
 - L image /banner-eleve.webp reste dans public/ : utilisée par la cartouche de /connexion.
 - Sauvegardes : manual/2026-09-12-retrait-banniere-eleve (student.tsx, banner-eleve.tsx, globals.css) + chiffrée 20260912T203850Z-443396.
 - Vérifs : typecheck OK ; vitest 17/17 ; 0 chunk/CSS servi ne contient be-slogan/be-character/BannerEleve ; banner-eleve.webp référencé uniquement par le chunk connexion ; /connexion 200 local et public.
+
+### 2026-09-12 (13) — Carte des territoires cliquable (bibliothèque français)
+- Remplacement des 6 cartouches `.atelier-domain` de FrenchLibrary par la carte d aventure `public/carte-francais.webp` (1672×941, source final_francais.png) dans un cadre blanc arrondi.
+- 6 îlots cliquables superposés (positions % : grammaire 3/3/22/30, conjugaison 24/40/20/32, orthographe 48/4/20/30, lexique 72/36/20/32, lecture 50/58/20/28, écriture 3/64/20/28), filtre identique à lancien sélecteur, étiquette au survol (titre + verbe + nb leçons), état actif doré, chips mobile ≤650px.
+- Titre de section « Six façons de progresser » → « La carte des territoires ».
+- ATTENTION : `.atelier-domains`/`.atelier-domain`/`.domain-symbol` conservés dans french-workshop.css car math-library.tsx les utilise toujours.
+- Backups : manual/2026-09-12-carte-francais + chiffrée 20260912T211816Z-653276. Typecheck OK, vitest 17/17. Vérifs : /connexion 200, /carte-francais.webp 200, chunk 24yh63epdoxj7.js contient map-island + carte-francais.webp, CSS 11i_4_-czci5j.css contient atelier-domains restauré.
