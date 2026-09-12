@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+secrets/
+certs/
+backups/
+*.egg-info/
+.coverage
+artifacts/
+
+node_modules/
+.next/
+.env.local
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+runtime/
+.env.production
+
+# Dépôts tiers re-synchronisables via scripts/sync_third_party_sources.py
+sources/third-party/*/

@@ -1,0 +1,102 @@
+"""Original CM2 workshops; calculations use the existing exact rational engine."""
+def build_courses(course,number,choice,error):
+    def entry(code,title,objective,discovery,explanation,example,tasks,hints,equalities=()):
+        item=course(code,title,0,["Lire les nombres et expliquer un calcul simple."],discovery,explanation,
+            ["Repère ce qui est demandé.","Représente la situation ou décompose les nombres.","Calcule, puis vérifie le sens du résultat."],example,
+            ["Calculer sans vérifier les unités ou la taille du résultat."],hints,tasks,equalities)
+        item["catalogue_objective"]=objective
+        if code=="FRACTIONS-DECIMALES":
+            for task,expected in zip(tasks,["0,3","0,45","1,62"]):
+                task["rule"]["expected"]=expected
+                task["rule"]["decimal_only"]=True
+        return item
+    def drawing(task,measure="fraction",**visual):
+        task["visual"]=visual
+        task["rule"]["diagram_measure"]=measure
+        return task
+    def order(question,labels,steps):
+        options=[{"id":f"n{i}","label":label} for i,label in enumerate(labels)]
+        return {"question":question,"response_type":"ordering","options":options[1:]+options[:1],
+            "rule":{"mode":"ordering","expected":[o["id"] for o in options],"solution_steps":steps}}
+    return [
+    entry("SOUSTRACTION","Retirer sans mélanger les rangs","Soustraire des nombres décimaux en alignant les rangs",
+        "Tu as 10 €. Tu dépenses 3,50 €. Comment trouver ce qu'il reste ?",
+        "Soustraire permet ici de chercher un reste. Aligne les unités, les dixièmes et les centièmes. Tu peux écrire des zéros à droite de la partie décimale sans changer la valeur. Vérifie en additionnant le reste et la somme retirée.",
+        ["10,00 − 3,50 = 6,50 : il reste 6,50 €.","Je vérifie : 6,50 + 3,50 = 10,00."],
+        [number("Une ficelle mesure 8,5 m. Tu coupes 2 m. Combien de mètres restent ?","8.5-2","Retire deux unités en gardant les cinq dixièmes.","m"),
+         number("Tu as 12 €. Un carnet coûte 4,75 €. Combien d'euros restent ?","12-4.75","Écris 12,00 et aligne les centièmes avant de soustraire.","€"),
+         number("Un ruban mesure 6,2 m. Tu retires 1,85 m. Quelle longueur reste en mètres ?","6.2-1.85","Écris 6,20. Soustrais les longueurs puis additionne pour vérifier.","m")],
+        ["Mets les unités sous les unités et les virgules l'une sous l'autre.","Complète avec un zéro à droite si nécessaire, puis vérifie par addition."],["10-3.5=6.5","6.5+3.5=10"]),
+    entry("FRACTION-QUANTITE","Prendre une fraction d'une collection","Calculer une fraction simple d'une quantité divisible",
+        "Tu partages 12 biscuits entre 4 enfants. Trois enfants réunissent leurs parts : quelle fraction des biscuits ont-ils ?",
+        "Pour prendre trois quarts d'une quantité, partage-la en quatre parts égales, puis prends trois parts. Le dénominateur, en bas, donne le nombre de parts égales. Le numérateur, en haut, donne le nombre de parts prises.",
+        ["Un quart de 12 biscuits : 12 ÷ 4 = 3 biscuits.","Trois quarts : 3 × 3 = 9 biscuits."],
+        [number("Quelle est la moitié de 18 billes ?","18/2","Partage les 18 billes en deux parts égales.","billes"),
+         number("Quel est le quart de 20 cartes ?","20/4","Partage les 20 cartes en quatre parts égales.","cartes"),
+         number("Combien font trois quarts de 20 cartes ?","20/4*3","Calcule d'abord un quart, puis prends trois parts.","cartes",error(15/3,"procedure","Tu as peut-être trouvé une seule part. Combien de parts faut-il prendre ?"))],
+        ["Trouve d'abord la taille d'une seule part.","Multiplie cette taille par le nombre de parts à prendre."],["12/4=3","3*3=9"]),
+    entry("FRACTIONS-DECIMALES","Passer des dixièmes aux décimaux","Relier fractions décimales et écriture décimale",
+        "Une bande entière est partagée en dix parts égales. Colorier quelques parts permet de voir les dixièmes.",
+        "Une fraction décimale a pour dénominateur 10, 100, 1 000… Un dixième s'écrit 0,1. Un centième s'écrit 0,01. Dans un nombre décimal, chaque chiffre a une place précise.",
+        ["Sept dixièmes s'écrivent 7/10 = 0,7.","Vingt-cinq centièmes s'écrivent 25/100 = 0,25."],
+        [drawing(number("La bande représente une unité. Écris la partie colorée sous forme décimale.","3/10","Trois parts sur dix représentent trois dixièmes."),kind="fraction",parts=10,selected=3),
+         number("Écris 45/100 sous forme décimale.","45/100","45 centièmes font 4 dixièmes et 5 centièmes."),
+         number("Écris 1 + 6/10 + 2/100 sous forme décimale.","1+6/10+2/100","Place 1 dans les unités, 6 dans les dixièmes et 2 dans les centièmes.")],
+        ["Repère si l'unité est partagée en dix ou en cent.","Le premier chiffre après la virgule indique les dixièmes ; le deuxième, les centièmes."],["7/10=0.7","25/100=0.25"]),
+    entry("RANGER-DECIMAUX","Mettre des décimaux dans l'ordre","Ranger des nombres décimaux en comparant les rangs",
+        "Trois coureurs ont des temps proches. Pour les classer, il faut comparer les secondes et les parties de seconde.",
+        "Compare d'abord les parties entières. Si elles sont égales, compare les dixièmes, puis les centièmes. Des zéros à droite peuvent aider : 2,5 et 2,50 sont égaux.",
+        ["2,05 est plus petit que 2,50 car 0 dixième est plus petit que 5 dixièmes.","L'ordre croissant va du plus petit au plus grand : 2,05 ; 2,5 ; 2,75."],
+        [order("Range du plus petit au plus grand.",["1,2","1,5","1,9"],["Les unités sont égales. Compare les dixièmes : 2, puis 5, puis 9."]),
+         order("Range ces longueurs du plus petit au plus grand.",["3,05 m","3,5 m","3,75 m"],["Écris 3,5 comme 3,50. Compare les dixièmes, puis les centièmes."]),
+         order("Range ces nombres du plus petit au plus grand.",["4,09","4,9","4,91","5"],["4,09 < 4,90 < 4,91 < 5. Le nombre de chiffres écrits ne suffit pas pour comparer."])],
+        ["Cherche d'abord la plus petite partie entière.","À partie entière égale, compare un rang après l'autre, en complétant si besoin avec des zéros."]),
+    entry("CONTENANCES","Mesurer ce qu'un récipient contient","Convertir litres centilitres et millilitres dans des situations simples",
+        "Une gourde contient un demi-litre. Une recette demande 250 mL. Peut-elle fournir cette quantité ?",
+        "Le litre mesure une contenance. Un litre vaut 100 centilitres ou 1 000 millilitres. Pour comparer ou additionner, exprime d'abord les contenances dans la même unité.",
+        ["0,5 L = 500 mL, car 0,5 × 1 000 = 500.","Après avoir versé 250 mL, il reste 500 − 250 = 250 mL."],
+        [number("Combien de millilitres contiennent 2 L ?","2*1000","Un litre vaut 1 000 millilitres.","mL"),
+         number("Exprime 75 cL en millilitres.","75*10","Un centilitre vaut 10 millilitres.","mL"),
+         number("Une bouteille contient 1,5 L. Tu verses 40 cL. Combien de millilitres restent ?","1.5*1000-40*10","Convertis 1,5 L et 40 cL en millilitres, puis soustrais.","mL")],
+        ["Choisis l'unité demandée avant de calculer.","Utilise 1 L = 1 000 mL et 1 cL = 10 mL."],["0.5*1000=500","500-250=250"]),
+    entry("MONNAIE","Préparer un achat et vérifier la monnaie","Calculer un prix total et la monnaie rendue",
+        "À la papeterie, tu achètes deux crayons à 1,50 € chacun. Tu donnes un billet de 5 €.",
+        "Calcule d'abord le prix total. La monnaie rendue complète ce total pour atteindre la somme donnée. Un euro vaut 100 centimes ; une écriture comme 1,50 € représente un euro et cinquante centimes.",
+        ["Deux crayons coûtent 2 × 1,50 = 3 €.","La monnaie est 5 − 3 = 2 €. Je vérifie : 3 + 2 = 5."],
+        [number("Trois cartes coûtent chacune 2 €. Quel est le prix total ?","3*2","Additionne trois fois le même prix, ou multiplie.","€"),
+         number("Un cahier coûte 3,80 €. Tu donnes 5 €. Combien d'euros doit-on te rendre ?","5-3.8","Cherche ce qui complète 3,80 pour aller à 5.","€"),
+         number("Tu achètes deux carnets à 2,75 € chacun et donnes 10 €. Combien d'euros te rend-on ?","10-2*2.75","Calcule les deux carnets, puis retire ce total de 10.","€")],
+        ["Calcule d'abord ce qui a été dépensé.","Additionne ensuite le prix et la monnaie proposée pour retrouver la somme donnée."],["2*1.5=3","5-3=2"]),
+    entry("ESTIMATION","Repérer un résultat impossible","Utiliser un ordre de grandeur pour vérifier un calcul",
+        "Un élève écrit 198 + 203 = 4 001. Sans poser l'addition, comment repérer qu'il s'est trompé ?",
+        "Une estimation utilise des nombres proches et faciles à calculer. Elle donne un ordre de grandeur, pas toujours la valeur exacte. Si le résultat est très éloigné, il faut reprendre le calcul.",
+        ["198 est proche de 200 ; 203 aussi. La somme est donc proche de 400.","Le calcul exact donne 401. Le résultat 4 001 est beaucoup trop grand."],
+        [choice("49 + 52 est proche de quel nombre ?",["10","100","1 000"],1,["50 + 50 = 100. La somme 49 + 52 est proche de 100."]),
+         choice("Un sac coûte 19 €. Quatre sacs coûtent environ…",["8 €","80 €","800 €"],1,["19 est proche de 20. Quatre fois 20 donnent 80."]),
+         choice("Pour 602 − 198, un élève obtient 804. Quelle vérification est utile ?",["600 − 200 est proche de 400","600 + 200 est proche de 800","Il faut toujours ajouter"],0,["Il s'agit d'une soustraction. 600 − 200 donne 400 ; 804 est incohérent. Le résultat exact est 404."])],
+        ["Remplace les nombres par des nombres ronds proches.","Garde l'opération demandée : une soustraction ne devient pas une addition."],["198+203=401","602-198=404"]),
+    entry("PARTAGES","Interpréter le reste d'un partage","Choisir une réponse en tenant compte du reste d'une division",
+        "Il faut transporter 23 élèves dans des véhicules de 5 places. Quatre véhicules ne suffisent pas.",
+        "Une division peut laisser un reste. Selon la question, on garde seulement les groupes complets, on ajoute un groupe pour tout contenir, ou on indique ce qui reste. Relis toujours ce que représente le quotient.",
+        ["23 = 4 × 5 + 3 : quatre véhicules pleins laissent trois élèves.","Il faut donc un cinquième véhicule pour transporter tout le monde."],
+        [number("Tu as 17 perles. Chaque bracelet demande 5 perles. Combien de bracelets complets peux-tu fabriquer ?","3","Trois bracelets utilisent 15 perles ; il reste 2 perles, pas assez pour un quatrième.","bracelets"),
+         number("On range 26 balles dans des boîtes de 6. Combien de boîtes faut-il pour tout ranger ?","5","Quatre boîtes contiennent 24 balles. Il faut une cinquième boîte pour les deux dernières.","boîtes"),
+         number("Tu répartis 29 cartes entre 4 joueurs, en donnant autant à chacun. Combien de cartes restent non distribuées ?","29-4*7","Sept cartes par joueur utilisent 28 cartes. Cherche le reste.","carte")],
+        ["Cherche le nombre de groupes complets et ce qui reste.","Demande-toi si la situation exige de tout ranger, seulement des groupes complets, ou le reste."],["4*5+3=23","4*7+1=29"]),
+    entry("RECTANGLES-COMPARER","Distinguer le tour et la surface","Distinguer aire et périmètre sur un quadrillage",
+        "Deux potagers peuvent occuper autant de terrain sans demander la même longueur de clôture.",
+        "L'aire mesure la surface : on compte les carrés unités. Le périmètre mesure le tour : on additionne les longueurs des quatre côtés. Des rectangles de même aire peuvent avoir des périmètres différents.",
+        ["Un rectangle de 3 cm sur 4 cm a une aire de 12 cm² et un périmètre de 14 cm.","Un rectangle de 2 cm sur 6 cm a aussi une aire de 12 cm², mais un périmètre de 16 cm."],
+        [drawing(number("Chaque carreau mesure 1 cm de côté. Quelle est l'aire du rectangle en cm² ?","3*4","Compte trois rangées de quatre carrés unités.","cm²"),measure="area",kind="grid",rows=3,columns=4),
+         drawing(number("Chaque carreau mesure 1 cm de côté. Quel est le périmètre du rectangle en cm ?","2*(2+5)","Le contour comprend deux côtés de 5 cm et deux côtés de 2 cm.","cm"),measure="perimeter",kind="grid",rows=2,columns=5),
+         drawing(number("Ce rectangle a la même aire que celui de 3 cm sur 4 cm. Quel est son périmètre en cm ? Chaque carreau a un côté de 1 cm.","2*(2+6)","Il mesure 6 cm sur 2 cm. Additionne les quatre côtés : l'aire ne donne pas le périmètre.","cm"),measure="perimeter",kind="grid",rows=2,columns=6)],
+        ["Cherches-tu les carreaux à l'intérieur ou les longueurs du contour ?","Pour l'aire, multiplie les rangées par les colonnes. Pour le périmètre, additionne les quatre côtés."],["3*4=12","2*(3+4)=14","2*6=12","2*(2+6)=16"]),
+    entry("DONNEES-COMPARER","Croiser les informations d'un tableau","Comparer et calculer à partir de données organisées",
+        "À la bibliothèque, un tableau distingue les romans et les bandes dessinées. Le total ne suffit pas toujours pour répondre.",
+        "Lis les titres des lignes et des colonnes. Prélève uniquement les données utiles. Une question peut demander une somme, une différence ou une comparaison. N'utilise pas tous les nombres simplement parce qu'ils sont présents.",
+        ["Lundi : 12 romans et 8 BD. Mardi : 15 romans et 6 BD.","Il y a 12 + 15 = 27 romans en deux jours. Les nombres de BD ne servent pas à cette question."],
+        [number("Lundi : 9 romans, 6 BD. Combien de livres ont été empruntés lundi ?","9+6","Additionne les deux catégories pour trouver le total du lundi.","livres"),
+         number("Lundi : 9 romans, 6 BD. Mardi : 14 romans, 5 BD. Combien de romans de plus mardi que lundi ?","14-9","Compare seulement les romans et calcule la différence.","romans"),
+         number("Lundi : 9 romans, 6 BD. Mardi : 14 romans, 5 BD. Combien de livres ont été empruntés en tout ?","9+6+14+5","Le total des deux jours réunit les romans et les BD des deux lignes.","livres")],
+        ["Repère le jour et la catégorie demandés.","La question demande-t-elle un total ou une différence ?"],["12+15=27"]),
+    ]

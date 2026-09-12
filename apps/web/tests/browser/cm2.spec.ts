@@ -1,0 +1,291 @@
+import {test,expect} from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+test("Sciences : hypothèse, circuit, conclusion et carnet",async({page})=>{
+  const failures:string[]=[];page.on("pageerror",error=>failures.push(error.message));
+  await page.goto("?subject=sciences");
+  await expect(page.locator(".science-mission")).toHaveCount(4);
+  const lab=page.getByRole("region",{name:"Laboratoire : Mission : allumer la lampe"});
+  await expect(lab.getByRole("button",{name:"Tester mon hypothèse"})).toBeDisabled();
+  await lab.getByLabel("Le réglage à tester").selectOption("ferme");
+  await lab.getByLabel("Que penses-tu observer avec ce réglage ?").fill("Je pense que la lampe va s’allumer car la boucle est fermée.");
+  await lab.getByRole("button",{name:"Tester mon hypothèse"}).click();
+  await expect(lab.getByText(/La lampe s’allume. Les deux bornes/)).toBeVisible();
+  await expect(lab.getByLabel("Le réglage à tester")).toBeDisabled();
+  await lab.getByRole("button",{name:"Indice 1",exact:true}).click();
+  await expect(lab.getByText(/Relève une différence/)).toBeVisible();
+  await lab.getByLabel("Quelle observation justifie ta conclusion ?").fill("La lampe s’allume avec la boucle fermée. Cela confirme mon hypothèse.");
+  await lab.getByRole("button",{name:"Garder ma conclusion"}).click();
+  await expect(lab.getByText("Ton essai est dans le carnet.")).toBeVisible();
+  await page.getByRole("button",{name:"Actualiser le carnet"}).click();
+  const record=page.locator(".science-notebook details").filter({hasText:"Fermer l’interrupteur"}).first();
+  await record.locator("summary").click();
+  await expect(record.getByText(/Cela confirme mon hypothèse/)).toBeVisible();
+  await lab.getByRole("button",{name:"Faire une autre observation"}).click();
+  await lab.getByLabel("Le réglage à tester").selectOption("debranche");
+  await lab.getByLabel("Que penses-tu observer avec ce réglage ?").fill("La lampe devrait s’éteindre.");
+  await lab.getByRole("button",{name:"Tester mon hypothèse"}).click();
+  await expect(lab.getByText(/La lampe est éteinte. Un fil/)).toBeVisible();
+  expect(failures).toEqual([]);
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa"]).analyze()).violations).toEqual([]);
+});
+
+test("Sciences : quiz sans solution immédiate, justification et correction explicite",async({page})=>{
+  await page.goto("?subject=sciences");
+  await page.getByRole("button",{name:/Métamorphoses de l’eau/}).click();
+  await page.getByRole("button",{name:"Commencer mon parcours"}).click();
+  await page.getByRole("button",{name:"Voir mon cours"}).click();
+  await expect(page.getByRole("heading",{name:"L’eau dans tous ses états",exact:true}).first()).toBeVisible();
+  await page.getByRole("button",{name:"Je fais un premier essai"}).click();
+  await expect(page.getByText("Réponse : Liquide",{exact:true})).toHaveCount(0);
+  await page.getByRole("button",{name:"Demander la correction",exact:true}).click();
+  await expect(page.getByText("Réponse : Liquide",{exact:true})).toBeVisible();
+  await page.getByLabel("L’eau n’existe plus",{exact:true}).check();
+  await page.getByRole("button",{name:"Vérifier mon premier essai"}).click();
+  await expect(page.getByText(/Un changement d’état n’est pas une disparition/)).toBeVisible();
+});
+
+test("Sciences : les quatre instruments et filtres sont accessibles",async({page})=>{
+  await page.goto("?subject=sciences");
+  await page.getByLabel("Mon domaine").selectOption("digestion");
+  await expect(page.locator(".science-mission")).toHaveCount(1);
+  await page.getByRole("button",{name:/À l’intérieur du vivant/}).click();
+  await expect(page.getByRole("img",{name:/Schéma simplifié du trajet digestif/})).toBeVisible();
+  await page.getByLabel("Mon domaine").selectOption("terre");
+  await page.getByRole("button",{name:/Notre planète sous la lumière/}).click();
+  await page.getByLabel("Le réglage à tester").selectOption("bas");
+  await page.getByLabel("Que penses-tu observer avec ce réglage ?").fill("L’ombre sera plus longue.");
+  await page.getByRole("button",{name:"Tester mon hypothèse"}).click();
+  await expect(page.locator(".lab-observation").filter({hasText:/l’ombre du même bâton s’allonge/})).toBeVisible();
+  await page.reload();
+  const record=page.locator(".science-notebook details").filter({hasText:"Placer la source lumineuse plus bas"}).first();
+  await record.locator("summary").click();
+  await record.getByRole("button",{name:"Reprendre cet essai"}).click();
+  await expect(page.locator(".lab-observation").filter({hasText:/l’ombre du même bâton s’allonge/})).toBeVisible();
+  await page.getByLabel("Quelle observation justifie ta conclusion ?").fill("Avec la lumière plus basse, l’ombre du bâton s’allonge.");
+  await page.getByRole("button",{name:"Garder ma conclusion"}).click();
+  await expect(page.getByText("Ton essai est dans le carnet.")).toBeVisible();
+});
+test("CM2 réel : leçon, erreur, indices, correction protégée et transfert",async({page})=>{
+  const failures:string[]=[];page.on("pageerror",error=>failures.push(error.message));
+  await page.goto(".");await page.getByRole("button",{name:"Mathématiques"}).click();
+  await expect(page.locator(".topic-card")).toHaveCount(32);
+  const course=page.locator(".topic-card").filter({hasText:"Lire, écrire et comparer les nombres décimaux"});
+  await course.getByRole("button",{name:"Commencer mon parcours"}).click();
+  await page.getByRole("button",{name:"Voir mon cours"}).click();
+  await expect(page.getByRole("heading",{name:"Ce que tu dois déjà savoir"})).toBeVisible();
+  await page.getByRole("button",{name:"Continuer la découverte"}).click();
+  await expect(page.getByRole("heading",{name:"Découverte avec un exemple concret"})).toBeVisible();
+  await page.screenshot({path:"test-results/cm2-decouverte.png",fullPage:true});
+  await page.getByRole("button",{name:"Je fais un premier essai"}).click();
+  await expect(page.getByRole("button",{name:"Vérifier mon premier essai"})).toBeDisabled();
+  await expect(page.getByRole("button",{name:"Comprendre la correction de mon essai"})).toHaveCount(0);
+  await page.getByLabel(/Ta réponse numérique/).fill("3,15");
+  await page.getByLabel(/Explique ta démarche/).fill("J'ai comparé 15 et 2.");
+  await page.getByRole("button",{name:"Vérifier mon premier essai"}).click();
+  await expect(page.getByText(/Compare des dixièmes avec des dixièmes/)).toBeVisible();
+  await page.getByRole("button",{name:"Comprendre la correction de mon essai"}).click();
+  await expect(page.getByText("Réponse : 3,2",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:"Passer au premier exercice progressif"}).click();
+  await page.getByRole("button",{name:"Indice 1",exact:true}).click();
+  await expect(page.getByText("Compare d'abord les parties entières des deux nombres.")).toBeVisible();
+  await page.getByRole("button",{name:"Indice 2",exact:true}).click();
+  await expect(page.getByText(/Complète les centièmes manquants/)).toBeVisible();
+  await page.getByLabel(/Ta réponse numérique/).fill("4,8");
+  await page.getByRole("button",{name:"Vérifier mon travail"}).click();
+  await page.screenshot({path:"test-results/cm2-indices.png",fullPage:true});
+  await page.getByRole("button",{name:"Essayer le deuxième exercice"}).click();
+  await expect(page.getByText(/Quel sac est le plus lourd/).first()).toBeVisible();
+  await expect(page.getByRole("button",{name:"Indice 1",exact:true})).toHaveCount(0);
+  await page.getByLabel(/Ta réponse numérique/).fill("6,1");
+  await page.getByRole("button",{name:"Vérifier mon travail"}).click();
+  await expect(page.getByRole("heading",{name:"Tu as pris le temps d’apprendre."})).toBeVisible();
+  expect(failures).toEqual([]);
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa"]).analyze()).violations).toEqual([]);
+});
+
+async function frenchCourse(page:import("@playwright/test").Page,title:string){
+  await page.goto(".");await page.getByRole("button",{name:"Français",exact:false}).click();
+  await expect(page.locator(".topic-card")).toHaveCount(28);
+  await page.locator(".topic-card").filter({has:page.getByRole("heading",{name:title,exact:true})}).getByRole("button",{name:"Commencer mon parcours"}).click();
+  await page.getByRole("button",{name:"Voir mon cours"}).click();
+  await page.getByRole("button",{name:"Je fais un premier essai"}).click();
+}
+
+test("Français : correction explicite, sujet et accents contrôlés",async({page})=>{
+  await frenchCourse(page,"Conjuguer au présent");
+  await expect(page.getByText("Réponse : suis",{exact:true})).toHaveCount(0);
+  await page.getByRole("button",{name:"Demander la correction",exact:true}).click();
+  await expect(page.getByText("Réponse : suis",{exact:true})).toBeVisible();
+  await page.getByLabel(/^Ta réponse :/).fill("suis");
+  await page.getByLabel(/Explique ta démarche/).fill("Le sujet est je, à la première personne du singulier.");
+  await page.getByRole("button",{name:"Vérifier mon premier essai"}).click();
+  await page.getByRole("button",{name:"Passer au premier exercice progressif"}).click();
+  await page.getByLabel(/^Ta réponse :/).fill("sommes");
+  await page.getByRole("button",{name:"Vérifier mon travail"}).click();
+  await page.getByRole("button",{name:"Essayer le deuxième exercice"}).click();
+  await page.getByLabel(/^Ta réponse :/).fill("etes");
+  await page.getByRole("button",{name:"Vérifier mon travail"}).click();
+  await expect(page.getByText(/À retravailler/)).toBeVisible();
+  await page.getByRole("button",{name:"Comprendre la correction de mon essai"}).click();
+  await expect(page.getByText("Réponse : êtes",{exact:true})).toBeVisible();
+  await page.screenshot({path:"test-results/francais-conjugaison.png",fullPage:true});
+});
+
+test("Français : une rédaction libre reste à relire avec un exemple non exclusif",async({page})=>{
+  await frenchCourse(page,"Écrire puis améliorer un petit récit");
+  await page.getByLabel(/^Ta réponse :/).fill("Sami ouvre la porte de la bibliothèque.");
+  await page.getByLabel(/Explique ta démarche/).fill("Je présente un personnage et le lieu.");
+  await page.getByRole("button",{name:"Vérifier mon premier essai"}).click();
+  await expect(page.getByText(/Question 1 · À relire avec un enseignant/)).toBeVisible();
+  await expect(page.getByText(/À retravailler/)).toHaveCount(0);
+  await page.getByRole("button",{name:"Comprendre la correction de mon essai"}).click();
+  await expect(page.getByRole("heading",{name:/Exemple possible, à comparer avec ton texte/})).toBeVisible();
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa"]).analyze()).violations).toEqual([]);
+  await page.screenshot({path:"test-results/francais-ecriture-mobile.png",fullPage:true});
+});
+
+test("Français : indices puis catégories de relecture",async({page})=>{
+  await frenchCourse(page,"Relire une phrase par catégories");
+  await page.getByRole("button",{name:"Indice 1",exact:true}).click();
+  await expect(page.getByText(/Relis d'abord les groupes nominaux/)).toBeVisible();
+  await page.getByLabel(/^Ta réponse :/).fill("Les petit chats jouent.");
+  await page.getByRole("button",{name:"Vérifier mon premier essai"}).click();
+  await expect(page.getByText("À vérifier : accord",{exact:true})).toBeVisible();
+  await expect(page.getByText(/Vérifie le nombre du nom chats/)).toBeVisible();
+  await expect(page.getByText("Réponse : Les petits chats jouent.",{exact:true})).toHaveCount(0);
+});
+
+test("Atelier : phrase interactive, filtres et recherche accessibles",async({page})=>{
+  const failures:string[]=[];page.on("pageerror",e=>failures.push(e.message));
+  await page.goto(".");
+  await expect(page.getByRole("heading",{name:/Les mots, ça se/})).toBeVisible();
+  await page.getByRole("button",{name:"Les explorateurs",exact:true}).click();
+  await expect(page.getByText("Le groupe sujet",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:/Lexique Joue avec le sens/}).click();
+  await expect(page.locator(".topic-card")).toHaveCount(5);
+  await page.getByRole("searchbox",{name:"Rechercher une leçon de français"}).fill("dictionnaire");
+  await expect(page.locator(".topic-card")).toHaveCount(1);
+  await page.getByRole("searchbox").fill("mot introuvable");
+  await expect(page.getByRole("heading",{name:"Aucune leçon avec ces mots."})).toBeVisible();
+  await page.getByRole("button",{name:"Retrouver toutes les leçons"}).click();
+  await expect(page.locator(".topic-card")).toHaveCount(28);
+  await page.screenshot({path:"test-results/francais-atelier-desktop.png",fullPage:true});
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa"]).analyze()).violations).toEqual([]);
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.screenshot({path:"test-results/francais-atelier-mobile.png",fullPage:true});
+  expect(failures).toEqual([]);
+});
+
+test("Dictionnaire : manipulation réelle de l'ordre des mots",async({page})=>{
+  await frenchCourse(page,"Chercher un mot dans le dictionnaire");
+  await page.getByLabel("arbre",{exact:true}).check();
+  await page.getByRole("button",{name:"Vérifier mon premier essai"}).click();
+  await page.getByRole("button",{name:"Passer au premier exercice progressif"}).click();
+  await page.getByRole("button",{name:"Monter cahier",exact:true}).click();
+  await page.getByRole("button",{name:"Monter cahier",exact:true}).click();
+  await page.getByRole("button",{name:"Vérifier mon travail"}).click();
+  await expect(page.getByText(/Question 1 · Réponse juste/)).toBeVisible();
+  await page.getByRole("button",{name:"Comprendre la correction de mon essai"}).click();
+  await expect(page.getByText("Réponse : cahier → canal → carte",{exact:true})).toBeVisible();
+});
+
+test("Maths : fractions manipulables, rectangle et recherche",async({page})=>{
+  await page.setViewportSize({width:1440,height:1100});
+  await page.goto(".");await page.getByRole("button",{name:"Mathématiques",exact:false}).click();
+  await expect(page.locator(".topic-card")).toHaveCount(32);
+  await page.getByLabel("Part 1",{exact:true}).click();
+  await page.getByLabel("Part 2",{exact:true}).click();
+  await expect(page.getByText("2/8",{exact:true})).toBeVisible();
+  await page.getByLabel("Nombre de parts égales").selectOption("4");
+  await expect(page.getByText("0/4",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:"Aire et périmètre",exact:true}).click();
+  await expect(page.getByText("Aire : 12 cm²",{exact:true})).toBeVisible();
+  await expect(page.getByText("Périmètre : 14 cm",{exact:true})).toBeVisible();
+  await page.getByLabel("Colonnes du rectangle").fill("6");
+  await page.getByLabel("Rangées du rectangle").fill("2");
+  await expect(page.getByText("Aire : 12 cm²",{exact:true})).toBeVisible();
+  await expect(page.getByText("Périmètre : 16 cm",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:/Mesures Mesure le quotidien/}).click();
+  await expect(page.locator(".topic-card")).toHaveCount(7);
+  await page.getByRole("searchbox",{name:"Rechercher une leçon de mathématiques"}).fill("contenance");
+  await expect(page.locator(".topic-card")).toHaveCount(1);
+  await page.getByRole("button",{name:"Tout explorer",exact:true}).click();
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:"test-results/math-atelier-desktop.png"});
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa"]).analyze()).violations).toEqual([]);
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa"]).analyze()).violations).toEqual([]);
+  await page.screenshot({path:"test-results/math-atelier-mobile.png"});
+});
+
+test("Maths : schéma réel, essai requis et écriture décimale",async({page})=>{
+  await page.goto(".");await page.getByRole("button",{name:"Mathématiques",exact:false}).click();
+  await page.locator(".topic-card").filter({has:page.getByRole("heading",{name:"Passer des dixièmes aux décimaux",exact:true})}).getByRole("button",{name:"Commencer mon parcours"}).click();
+  await page.getByRole("button",{name:"Voir mon cours"}).click();
+  await page.getByRole("button",{name:"Je fais un premier essai"}).click();
+  await expect(page.getByRole("img",{name:/3 parts colorées sur 10/})).toBeVisible();
+  await expect(page.getByRole("button",{name:"Demander la correction",exact:true})).toHaveCount(0);
+  await expect(page.getByRole("button",{name:"Comprendre la correction de mon essai"})).toHaveCount(0);
+  await page.getByLabel(/Ta réponse numérique/).fill("0,03");
+  await page.getByRole("button",{name:"Vérifier mon premier essai"}).click();
+  await expect(page.getByText(/Question 1 · À retravailler/)).toBeVisible();
+  await page.getByRole("button",{name:"Comprendre la correction de mon essai"}).click();
+  await expect(page.getByText("Réponse : 0,3",{exact:true})).toBeVisible();
+  await page.screenshot({path:"test-results/math-fraction-exercice.png",fullPage:true});
+});
+
+
+test("Histoire : les trois thèmes, interface accessible sur mobile",async({page})=>{
+  await page.setViewportSize({width:1440,height:1000});await page.goto("?subject=histoire");
+  await expect(page.locator(".history-themes button")).toHaveCount(3);
+  await expect(page.locator(".history-course")).toHaveCount(2);
+  await page.screenshot({path:"test-results/history-desktop.png",fullPage:true});
+  await page.getByRole("button",{name:/L’âge industriel en France/}).click();
+  await expect(page.locator(".history-course")).toHaveCount(1);
+  await page.getByRole("button",{name:/Des guerres mondiales à l’Union européenne/}).click();
+  await expect(page.locator(".history-course")).toHaveCount(3);
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa"]).analyze()).violations).toEqual([]);
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.screenshot({path:"test-results/history-mobile.png",fullPage:true});
+});
+
+test("Histoire : Ferry, lecture critique, frise puis correction progressive",async({page})=>{
+  await page.goto("?subject=histoire");
+  await page.locator(".history-course").filter({has:page.getByRole("heading",{name:"L’école primaire au temps de Jules Ferry",exact:true})}).getByRole("button",{name:"Commencer mon parcours"}).click();
+  await page.getByRole("button",{name:"Voir mon cours"}).click();
+  await expect(page.getByRole("region",{name:"Les outils de l’historien"})).toBeVisible();
+  await page.getByRole("tab",{name:"Le document",exact:true}).click();
+  await expect(page.getByText("La loi ne prouve pas que chaque enfant fréquente immédiatement une école, ni que les inégalités disparaissent.")).toHaveCount(0);
+  await expect(page.getByRole("button",{name:"Observer un autre indice"})).toBeDisabled();
+  await page.getByLabel(/Qui est concerné/).fill("Les filles et les garçons.");
+  await page.getByRole("button",{name:"Observer un autre indice"}).click();
+  await page.getByLabel(/Le texte parle-t-il/).fill("Il parle d’instruction.");
+  await page.getByRole("button",{name:"Observer un autre indice"}).click();
+  await page.getByLabel(/Pourquoi faut-il lire/).fill("Les lois et les conditions de vie sont celles de l’époque.");
+  await page.getByRole("button",{name:"Comparer avec les limites du document"}).click();
+  await expect(page.getByText("Ce que l’on ne peut pas prouver",{exact:true})).toBeVisible();
+  await page.getByRole("tab",{name:"Les lieux",exact:true}).click();await expect(page.getByRole("img",{name:/Grille de localisation/})).toBeVisible();
+  await page.getByRole("tab",{name:"Les personnes",exact:true}).click();await expect(page.getByRole("heading",{name:"Jules Ferry",exact:true})).toBeVisible();
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa"]).analyze()).violations).toEqual([]);
+  await page.screenshot({path:"test-results/history-ferry.png",fullPage:true});
+  await page.getByRole("button",{name:"Je fais un premier essai"}).click();
+  await page.getByRole("button",{name:"Indice 1",exact:true}).click();
+  await page.getByLabel("La création de la première école de France",{exact:true}).check();
+  await page.getByRole("button",{name:"Vérifier mon premier essai"}).click();
+  await expect(page.getByText(/Question 1 · À retravailler/)).toBeVisible();
+  await page.getByRole("button",{name:"Comprendre la correction de mon essai"}).click();
+  await expect(page.getByText(/La loi de 1881 instaure la gratuité/)).toBeVisible();
+  await page.getByRole("button",{name:"Passer au premier exercice progressif"}).click();
+  await page.getByRole("button",{name:"Monter Gratuité de l’école primaire publique",exact:true}).click();
+  await page.getByRole("button",{name:"Vérifier mon travail"}).click();
+  await expect(page.getByText(/Question 1 · Réponse juste/)).toBeVisible();
+});

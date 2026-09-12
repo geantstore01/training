@@ -1,0 +1,188 @@
+{
+  "forms": {
+    "être|indicatif|present|0": "suis",
+    "être|indicatif|present|1": "es",
+    "être|indicatif|present|2": "est",
+    "être|indicatif|present|3": "sommes",
+    "être|indicatif|present|5": "sont",
+    "être|indicatif|futur|0": "serai",
+    "être|indicatif|futur|1": "seras",
+    "être|indicatif|futur|2": "sera",
+    "être|indicatif|futur|3": "serons",
+    "être|indicatif|futur|4": "serez",
+    "être|indicatif|futur|5": "seront",
+    "avoir|indicatif|present|0": "ai",
+    "avoir|indicatif|present|1": "as",
+    "avoir|indicatif|present|2": "a",
+    "avoir|indicatif|present|3": "avons",
+    "avoir|indicatif|present|4": "avez",
+    "avoir|indicatif|present|5": "ont",
+    "avoir|indicatif|imparfait|0": "avais",
+    "avoir|indicatif|imparfait|1": "avais",
+    "avoir|indicatif|imparfait|2": "avait",
+    "avoir|indicatif|imparfait|3": "avions",
+    "avoir|indicatif|imparfait|4": "aviez",
+    "avoir|indicatif|imparfait|5": "avaient",
+    "avoir|indicatif|futur|0": "aurai",
+    "avoir|indicatif|futur|1": "auras",
+    "avoir|indicatif|futur|2": "aura",
+    "avoir|indicatif|futur|3": "aurons",
+    "avoir|indicatif|futur|4": "aurez",
+    "avoir|indicatif|futur|5": "auront",
+    "aller|indicatif|present|0": "vais",
+    "aller|indicatif|present|1": "vas",
+    "aller|indicatif|present|2": "va",
+    "aller|indicatif|present|3": "allons",
+    "aller|indicatif|present|4": "allez",
+    "aller|indicatif|present|5": "vont",
+    "aller|indicatif|imparfait|0": "allais",
+    "aller|indicatif|imparfait|1": "allais",
+    "aller|indicatif|imparfait|2": "allait",
+    "aller|indicatif|imparfait|3": "allions",
+    "aller|indicatif|imparfait|4": "alliez",
+    "aller|indicatif|imparfait|5": "allaient",
+    "aller|indicatif|futur|0": "irai",
+    "aller|indicatif|futur|1": "iras",
+    "aller|indicatif|futur|2": "ira",
+    "aller|indicatif|futur|3": "irons",
+    "aller|indicatif|futur|4": "irez",
+    "aller|indicatif|futur|5": "iront"
+  },
+  "excluded_disagreements": [
+    {
+      "key": "être|indicatif|present|4",
+      "first": "êtes",
+      "second": "̻tes"
+    },
+    {
+      "key": "être|indicatif|imparfait|0",
+      "first": "étais",
+      "second": "̩tais"
+    },
+    {
+      "key": "être|indicatif|imparfait|1",
+      "first": "étais",
+      "second": "̩tais"
+    },
+    {
+      "key": "être|indicatif|imparfait|2",
+      "first": "était",
+      "second": "̩tait"
+    },
+    {
+      "key": "être|indicatif|imparfait|3",
+      "first": "étions",
+      "second": "̩tions"
+    },
+    {
+      "key": "être|indicatif|imparfait|4",
+      "first": "étiez",
+      "second": "̩tiez"
+    },
+    {
+      "key": "être|indicatif|imparfait|5",
+      "first": "étaient",
+      "second": "̩taient"
+    },
+    {
+      "key": "faire|indicatif|present|0",
+      "first": "fais",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|present|1",
+      "first": "fais",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|present|2",
+      "first": "fait",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|present|3",
+      "first": "faisons",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|present|4",
+      "first": "faites",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|present|5",
+      "first": "font",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|imparfait|0",
+      "first": "faisais",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|imparfait|1",
+      "first": "faisais",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|imparfait|2",
+      "first": "faisait",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|imparfait|3",
+      "first": "faisions",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|imparfait|4",
+      "first": "faisiez",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|imparfait|5",
+      "first": "faisaient",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|futur|0",
+      "first": "ferai",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|futur|1",
+      "first": "feras",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|futur|2",
+      "first": "fera",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|futur|3",
+      "first": "ferons",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|futur|4",
+      "first": "ferez",
+      "second": "f"
+    },
+    {
+      "key": "faire|indicatif|futur|5",
+      "first": "feront",
+      "second": "f"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/andrewmcc/french-verbs",
+      "commit": "135c2a6dd3de262d72c1e27ff6f5a3cd136044ce"
+    },
+    {
+      "url": "https://github.com/WordWeaverTools/WordWeaverLite",
+      "commit": "9ed1d460601bca89589433941a1c03a98d9b02b9"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+rule_files:
+- /etc/prometheus/alerts.yml
+scrape_configs:
+- job_name: educapilote
+  static_configs:
+  - targets:
+    - auth-service:8000
+    labels:
+      service: auth-service
+  - targets:
+    - user-service:8000
+    labels:
+      service: user-service
+  - targets:
+    - class-service:8000
+    labels:
+      service: class-service
+  - targets:
+    - curriculum-service:8000
+    labels:
+      service: curriculum-service
+  - targets:
+    - content-service:8000
+    labels:
+      service: content-service
+  - targets:
+    - exercise-service:8000
+    labels:
+      service: exercise-service
+  - targets:
+    - assessment-service:8000
+    labels:
+      service: assessment-service
+  - targets:
+    - tutor-service:8000
+    labels:
+      service: tutor-service
+  - targets:
+    - retrieval-service:8000
+    labels:
+      service: retrieval-service
+  - targets:
+    - speech-service:8000
+    labels:
+      service: speech-service
+  - targets:
+    - notification-service:8000
+    labels:
+      service: notification-service
+  - targets:
+    - analytics-service:8000
+    labels:
+      service: analytics-service
+  - targets:
+    - admin-service:8000
+    labels:
+      service: admin-service
+  - targets:
+    - safety-service:8000
+    labels:
+      service: safety-service
+  - targets:
+    - ai-router-service:8000
+    labels:
+      service: ai-router-service
+- job_name: node
+  static_configs:
+  - targets:
+    - node-exporter:9100
+- job_name: prometheus
+  static_configs:
+  - targets:
+    - localhost:9090
+- job_name: loki
+  static_configs:
+  - targets:
+    - loki:3100
+- job_name: alloy
+  static_configs:
+  - targets:
+    - alloy:12345
+- job_name: traefik
+  static_configs:
+  - targets:
+    - traefik:8082

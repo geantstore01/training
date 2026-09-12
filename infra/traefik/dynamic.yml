@@ -1,0 +1,41 @@
+http:
+  routers:
+    web:
+      rule: 'Host(`{{ env "EDU_DOMAIN" }}`)'
+      entryPoints: [websecure]
+      service: web
+      middlewares: [security, limits]
+      tls:
+        certResolver: le
+  services:
+    web:
+      loadBalancer:
+        serversTransport: edu
+        servers:
+          - url: http://web:3000
+        healthCheck:
+          path: /api/health
+          interval: 15s
+          timeout: 3s
+  middlewares:
+    security:
+      headers:
+        stsSeconds: 31536000
+        contentTypeNosniff: true
+        frameDeny: true
+        referrerPolicy: no-referrer
+    limits:
+      buffering:
+        maxRequestBodyBytes: 1048576
+        memRequestBodyBytes: 32768
+        maxResponseBodyBytes: 8388608
+  serversTransports:
+    edu:
+      forwardingTimeouts:
+        dialTimeout: 3s
+        responseHeaderTimeout: 120s
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+      sniStrict: true

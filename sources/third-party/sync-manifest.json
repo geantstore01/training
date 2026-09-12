@@ -1,0 +1,39 @@
+{
+  "synchronised_at": "2026-09-10T21:10:32.025057+00:00",
+  "sources": [
+    {
+      "name": "ressources-pedagogiques",
+      "repository": "https://github.com/Kazhnuz/ressources-pedagogiques.git",
+      "commit": "bc28586ef859b6b8cbca752ab7eb7e43dc11f0cc",
+      "files": 3,
+      "licence_files": [
+        "LICENCE"
+      ],
+      "snapshot_sha256": "1fb1c85b0786c8ac8d3f3c9a72b486e9e18553045368bbdb67f838b76b418d06"
+    },
+    {
+      "name": "locochoco",
+      "repository": "https://github.com/grouan/LocoChoco.git",
+      "commit": "ba34157578580e78ef2f7705b92c9ac81e289f37",
+      "files": 15,
+      "licence_files": [],
+      "snapshot_sha256": "9dac34a688996169a6a26752ff67f10b164dfa7757bf6b5834de5310d5e70101"
+    },
+    {
+      "name": "ecole-interactive",
+      "repository": "https://github.com/nakkouche/ecole-interactive.git",
+      "commit": "a390fa5e266d4df32dcd082a29a56f4063104f1e",
+      "files": 116,
+      "licence_files": [],
+      "snapshot_sha256": "cdc937464b6feb3762209c99682c1b1ff30fc9a24cfaaace7e09b42140b9686e"
+    },
+    {
+      "name": "jeux",
+      "repository": "https://github.com/Antonin777/Jeux.git",
+      "commit": "e2fb0e5dde7e0284dc3eb23600138d5e65c68273",
+      "files": 6,
+      "licence_files": [],
+      "snapshot_sha256": "bb6ceb745c834573767ea7c360094121f2506af2ba653e21d11b0780a061256c"
+    }
+  ]
+}

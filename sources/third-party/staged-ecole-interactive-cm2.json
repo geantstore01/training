@@ -1,0 +1,2356 @@
+{
+  "source": "https://github.com/nakkouche/ecole-interactive",
+  "commit": "a390fa5e266d4df32dcd082a29a56f4063104f1e",
+  "license": "MIT declared in upstream README; verify LICENSE file before publication",
+  "created_at": "2026-09-10T21:38:45.837538+00:00",
+  "records": [
+    {
+      "upstream_path": "content/qcm/CM2/Francais/analyse-grammaticale-approfondie.md",
+      "sha256": "78c1dfee38a95f3390b990c4820f4388c2250ec06c006abb0138d41d598e8f9b",
+      "metadata": {
+        "id": "CM2-FR-01",
+        "matiere": "Français",
+        "niveau": "CM2",
+        "titre": "Analyse grammaticale approfondie",
+        "description": "Maîtrise l'analyse complète d'une phrase : nature, fonction, compléments. Grammaire approfondie.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Dans \"Marie donne un livre à son frère\", quel est le COI (Complément d'Objet Indirect) ?",
+          "options": [
+            {
+              "label": "Marie",
+              "correct": false
+            },
+            {
+              "label": "un livre",
+              "correct": false
+            },
+            {
+              "label": "à son frère",
+              "correct": true
+            },
+            {
+              "label": "donne",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Quelle est la différence entre un COD et un COI ?",
+          "options": [
+            {
+              "label": "Il n'y a pas de différence",
+              "correct": false
+            },
+            {
+              "label": "Le COD est relié directement au verbe, le COI nécessite une préposition",
+              "correct": true
+            },
+            {
+              "label": "Le COI est toujours avant le verbe",
+              "correct": false
+            },
+            {
+              "label": "Le COD est toujours un pronom",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Dans \"Le chien de mon voisin aboie fort\", quelle est la fonction de \"de mon voisin\" ?",
+          "options": [
+            {
+              "label": "Sujet",
+              "correct": false
+            },
+            {
+              "label": "Complément du nom \"chien\"",
+              "correct": true
+            },
+            {
+              "label": "COD",
+              "correct": false
+            },
+            {
+              "label": "Attribut",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Qu'est-ce qu'un attribut du sujet ?",
+          "options": [
+            {
+              "label": "Un complément circonstanciel",
+              "correct": false
+            },
+            {
+              "label": "Un mot ou groupe de mots qui donne une caractéristique au sujet via un verbe d'état",
+              "correct": true
+            },
+            {
+              "label": "Un sujet",
+              "correct": false
+            },
+            {
+              "label": "Un COD",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Dans \"Pierre est intelligent\", quelle est la fonction de \"intelligent\" ?",
+          "options": [
+            {
+              "label": "COD",
+              "correct": false
+            },
+            {
+              "label": "Attribut du sujet",
+              "correct": true
+            },
+            {
+              "label": "Complément circonstanciel",
+              "correct": false
+            },
+            {
+              "label": "Sujet",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Quel type de proposition est : \"Quand il pleut\" dans la phrase \"Quand il pleut, je reste à la maison\" ?",
+          "options": [
+            {
+              "label": "Proposition principale",
+              "correct": false
+            },
+            {
+              "label": "Proposition subordonnée circonstancielle",
+              "correct": true
+            },
+            {
+              "label": "Proposition indépendante",
+              "correct": false
+            },
+            {
+              "label": "Proposition coordonnée",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Comment reconnaît-on un pronom relatif ?",
+          "options": [
+            {
+              "label": "Il commence toujours par \"que\"",
+              "correct": false
+            },
+            {
+              "label": "Il relie deux propositions et remplace un nom (qui, que, dont, où...)",
+              "correct": true
+            },
+            {
+              "label": "Il est toujours sujet",
+              "correct": false
+            },
+            {
+              "label": "Il n'existe pas",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Dans \"Le livre que je lis est passionnant\", que remplace le pronom \"que\" ?",
+          "options": [
+            {
+              "label": "Je",
+              "correct": false
+            },
+            {
+              "label": "Le livre",
+              "correct": true
+            },
+            {
+              "label": "lis",
+              "correct": false
+            },
+            {
+              "label": "passionnant",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Qu'est-ce qu'une proposition indépendante ?",
+          "options": [
+            {
+              "label": "Une proposition qui dépend d'une autre",
+              "correct": false
+            },
+            {
+              "label": "Une proposition qui a un sens complet toute seule",
+              "correct": true
+            },
+            {
+              "label": "Une proposition sans verbe",
+              "correct": false
+            },
+            {
+              "label": "Une proposition avec \"que\"",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Dans \"Je pense que tu as raison\", combien y a-t-il de propositions ?",
+          "options": [
+            {
+              "label": "1 proposition",
+              "correct": false
+            },
+            {
+              "label": "2 propositions",
+              "correct": true
+            },
+            {
+              "label": "3 propositions",
+              "correct": false
+            },
+            {
+              "label": "0 proposition",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Francais/conjugaison-temps-composes.md",
+      "sha256": "cda6589197dc85e304f7c2b3e56e55200e0ca9940b69badfe7914008419b3ab8",
+      "metadata": {
+        "id": "CM2-FR-02",
+        "matiere": "Français",
+        "niveau": "CM2",
+        "titre": "Conjugaison : temps composés et modes",
+        "description": "Maîtrise les temps composés et les modes verbaux. Conjugaisons étendues.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Quel est l'infinitif du verbe dans \"Nous avons fini\" ?",
+          "options": [
+            {
+              "label": "Avoir",
+              "correct": false
+            },
+            {
+              "label": "Finir",
+              "correct": true
+            },
+            {
+              "label": "Avons",
+              "correct": false
+            },
+            {
+              "label": "Fini",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "À quel temps est conjugué \"J'avais mangé\" ?",
+          "options": [
+            {
+              "label": "Passé composé",
+              "correct": false
+            },
+            {
+              "label": "Plus-que-parfait",
+              "correct": true
+            },
+            {
+              "label": "Imparfait",
+              "correct": false
+            },
+            {
+              "label": "Futur antérieur",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Comment forme-t-on le plus-que-parfait ?",
+          "options": [
+            {
+              "label": "Auxiliaire au présent + participe passé",
+              "correct": false
+            },
+            {
+              "label": "Auxiliaire à l'imparfait + participe passé",
+              "correct": true
+            },
+            {
+              "label": "Auxiliaire au futur + participe passé",
+              "correct": false
+            },
+            {
+              "label": "Verbe seul à l'imparfait",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "À quel mode est conjugué le verbe dans \"Viens ici !\" ?",
+          "options": [
+            {
+              "label": "Indicatif",
+              "correct": false
+            },
+            {
+              "label": "Impératif",
+              "correct": true
+            },
+            {
+              "label": "Subjonctif",
+              "correct": false
+            },
+            {
+              "label": "Conditionnel",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Conjugue \"être\" au passé simple avec \"il\" :",
+          "options": [
+            {
+              "label": "Il était",
+              "correct": false
+            },
+            {
+              "label": "Il a été",
+              "correct": false
+            },
+            {
+              "label": "Il fut",
+              "correct": true
+            },
+            {
+              "label": "Il sera",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Le conditionnel présent exprime :",
+          "options": [
+            {
+              "label": "Un ordre",
+              "correct": false
+            },
+            {
+              "label": "Une condition, un souhait, une politesse",
+              "correct": true
+            },
+            {
+              "label": "Une certitude",
+              "correct": false
+            },
+            {
+              "label": "Le passé",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Comment conjugue-t-on \"pouvoir\" au conditionnel présent avec \"je\" ?",
+          "options": [
+            {
+              "label": "Je peux",
+              "correct": false
+            },
+            {
+              "label": "Je pouvais",
+              "correct": false
+            },
+            {
+              "label": "Je pourrais",
+              "correct": true
+            },
+            {
+              "label": "Je pourrai",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Quel est le participe passé du verbe \"venir\" ?",
+          "options": [
+            {
+              "label": "Venu",
+              "correct": false
+            },
+            {
+              "label": "Venu",
+              "correct": true
+            },
+            {
+              "label": "Vener",
+              "correct": false
+            },
+            {
+              "label": "Venant",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "À quel temps conjugue-t-on après \"si\" dans \"Si j'avais su, je serais venu\" ?",
+          "options": [
+            {
+              "label": "Conditionnel",
+              "correct": false
+            },
+            {
+              "label": "Présent",
+              "correct": false
+            },
+            {
+              "label": "Plus-que-parfait",
+              "correct": true
+            },
+            {
+              "label": "Futur",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Qu'exprime le subjonctif ?",
+          "options": [
+            {
+              "label": "Une certitude",
+              "correct": false
+            },
+            {
+              "label": "Un doute, un souhait, une possibilité",
+              "correct": true
+            },
+            {
+              "label": "Un ordre",
+              "correct": false
+            },
+            {
+              "label": "Le passé",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Francais/production-ecrite-structuree.md",
+      "sha256": "6bd530297ee6904030802244460b262a92047fca6793d9f853516d3105beb491",
+      "metadata": {
+        "id": "CM2-FR-03",
+        "matiere": "Français",
+        "niveau": "CM2",
+        "titre": "Production écrite structurée",
+        "description": "Rédige des textes structurés et cohérents. Révision et usages adaptés.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Qu'est-ce qu'un paragraphe ?",
+          "options": [
+            {
+              "label": "Une seule phrase",
+              "correct": false
+            },
+            {
+              "label": "Un ensemble de phrases qui développent une même idée",
+              "correct": true
+            },
+            {
+              "label": "Un mot",
+              "correct": false
+            },
+            {
+              "label": "Une page entière",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Dans un récit, quelle est la structure de base ?",
+          "options": [
+            {
+              "label": "Situation initiale, élément perturbateur, péripéties, résolution, situation finale",
+              "correct": true
+            },
+            {
+              "label": "Début et fin seulement",
+              "correct": false
+            },
+            {
+              "label": "Une seule partie",
+              "correct": false
+            },
+            {
+              "label": "Aucune structure",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Qu'est-ce qu'un connecteur logique ?",
+          "options": [
+            {
+              "label": "Un mot qui relie des objets",
+              "correct": false
+            },
+            {
+              "label": "Un mot qui relie des phrases ou des idées (donc, mais, car, alors...)",
+              "correct": true
+            },
+            {
+              "label": "Un verbe",
+              "correct": false
+            },
+            {
+              "label": "Un adjectif",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Pourquoi utilise-t-on des paragraphes dans un texte ?",
+          "options": [
+            {
+              "label": "Pour faire joli",
+              "correct": false
+            },
+            {
+              "label": "Pour organiser les idées et faciliter la lecture",
+              "correct": true
+            },
+            {
+              "label": "Parce que c'est obligatoire",
+              "correct": false
+            },
+            {
+              "label": "Pour remplir la page",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Dans un texte argumentatif, que doit-on présenter ?",
+          "options": [
+            {
+              "label": "Seulement son avis",
+              "correct": false
+            },
+            {
+              "label": "Son avis avec des arguments et des exemples",
+              "correct": true
+            },
+            {
+              "label": "Des histoires",
+              "correct": false
+            },
+            {
+              "label": "Des poésies",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Qu'est-ce que réviser un texte ?",
+          "options": [
+            {
+              "label": "Le recopier",
+              "correct": false
+            },
+            {
+              "label": "Le relire pour corriger les erreurs et l'améliorer",
+              "correct": true
+            },
+            {
+              "label": "L'effacer",
+              "correct": false
+            },
+            {
+              "label": "Le montrer",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Pour décrire un personnage, on utilise surtout :",
+          "options": [
+            {
+              "label": "Des verbes d'action",
+              "correct": false
+            },
+            {
+              "label": "Des adjectifs et des compléments du nom",
+              "correct": true
+            },
+            {
+              "label": "Des chiffres",
+              "correct": false
+            },
+            {
+              "label": "Des dialogues",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Dans une lettre, quelle formule utilise-t-on au début ?",
+          "options": [
+            {
+              "label": "Au revoir",
+              "correct": false
+            },
+            {
+              "label": "Cher / Chère... ou Bonjour...",
+              "correct": true
+            },
+            {
+              "label": "Merci",
+              "correct": false
+            },
+            {
+              "label": "Fin",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Qu'est-ce qu'un brouillon ?",
+          "options": [
+            {
+              "label": "La version finale",
+              "correct": false
+            },
+            {
+              "label": "Une première version qu'on peut modifier",
+              "correct": true
+            },
+            {
+              "label": "Une page blanche",
+              "correct": false
+            },
+            {
+              "label": "Un dessin",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Pour rendre un texte plus vivant, on peut utiliser :",
+          "options": [
+            {
+              "label": "Toujours les mêmes mots",
+              "correct": false
+            },
+            {
+              "label": "Des synonymes, des comparaisons et varier les phrases",
+              "correct": true
+            },
+            {
+              "label": "Seulement des phrases courtes",
+              "correct": false
+            },
+            {
+              "label": "Aucune ponctuation",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Geographie/europe-union-europeenne.md",
+      "sha256": "07a2239525084e4fc4491f0b4abd2fb6d404304deb59d7f7fe34d16c89e471cb",
+      "metadata": {
+        "id": "CM2-GEO-01",
+        "matiere": "Géographie",
+        "niveau": "CM2",
+        "titre": "L'Europe et l'Union européenne",
+        "description": "Découvre l'Europe, ses pays et le rôle de l'Union européenne. Repères mondiaux.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Combien y a-t-il de pays dans l'Union européenne actuellement (après le Brexit) ?",
+          "options": [
+            {
+              "label": "15 pays",
+              "correct": false
+            },
+            {
+              "label": "25 pays",
+              "correct": false
+            },
+            {
+              "label": "27 pays",
+              "correct": true
+            },
+            {
+              "label": "30 pays",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Quel est le nom de la monnaie commune utilisée dans de nombreux pays de l'UE ?",
+          "options": [
+            {
+              "label": "Le franc",
+              "correct": false
+            },
+            {
+              "label": "La livre",
+              "correct": false
+            },
+            {
+              "label": "L'euro",
+              "correct": true
+            },
+            {
+              "label": "Le dollar",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Quelle ville abrite le Parlement européen ?",
+          "options": [
+            {
+              "label": "Paris",
+              "correct": false
+            },
+            {
+              "label": "Bruxelles",
+              "correct": false
+            },
+            {
+              "label": "Strasbourg (et Bruxelles)",
+              "correct": true
+            },
+            {
+              "label": "Londres",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Quel pays a quitté l'Union européenne en 2020 ?",
+          "options": [
+            {
+              "label": "La France",
+              "correct": false
+            },
+            {
+              "label": "L'Allemagne",
+              "correct": false
+            },
+            {
+              "label": "Le Royaume-Uni",
+              "correct": true
+            },
+            {
+              "label": "L'Espagne",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Combien y a-t-il d'étoiles sur le drapeau européen ?",
+          "options": [
+            {
+              "label": "10 étoiles",
+              "correct": false
+            },
+            {
+              "label": "12 étoiles",
+              "correct": true
+            },
+            {
+              "label": "27 étoiles",
+              "correct": false
+            },
+            {
+              "label": "15 étoiles",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Quels sont les pays voisins de la France ?",
+          "options": [
+            {
+              "label": "Espagne, Italie, Suisse, Allemagne, Belgique, Luxembourg",
+              "correct": true
+            },
+            {
+              "label": "Angleterre, Portugal, Autriche",
+              "correct": false
+            },
+            {
+              "label": "Seulement l'Allemagne et l'Italie",
+              "correct": false
+            },
+            {
+              "label": "Aucun pays voisin",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Quelle est la capitale de l'Allemagne ?",
+          "options": [
+            {
+              "label": "Munich",
+              "correct": false
+            },
+            {
+              "label": "Berlin",
+              "correct": true
+            },
+            {
+              "label": "Francfort",
+              "correct": false
+            },
+            {
+              "label": "Hambourg",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Qu'est-ce que l'Union européenne ?",
+          "options": [
+            {
+              "label": "Un pays",
+              "correct": false
+            },
+            {
+              "label": "Une association de pays européens qui coopèrent",
+              "correct": true
+            },
+            {
+              "label": "Une ville",
+              "correct": false
+            },
+            {
+              "label": "Une montagne",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Quel continent se trouve au sud de l'Europe ?",
+          "options": [
+            {
+              "label": "L'Asie",
+              "correct": false
+            },
+            {
+              "label": "L'Afrique",
+              "correct": true
+            },
+            {
+              "label": "L'Amérique",
+              "correct": false
+            },
+            {
+              "label": "L'Océanie",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Quelle est la capitale de l'Italie ?",
+          "options": [
+            {
+              "label": "Milan",
+              "correct": false
+            },
+            {
+              "label": "Venise",
+              "correct": false
+            },
+            {
+              "label": "Rome",
+              "correct": true
+            },
+            {
+              "label": "Naples",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Histoire/revolution-francaise.md",
+      "sha256": "10a7f5ad92ae7be97c05eb950f9c8fa3f1d3cc55885b23818f5c0127b17a3bcc",
+      "metadata": {
+        "id": "CM2-HIST-01",
+        "matiere": "Histoire",
+        "niveau": "CM2",
+        "titre": "La Révolution française et l'Empire",
+        "description": "Découvre la Révolution française de 1789, ses causes et ses conséquences. Repères chronologiques.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "En quelle année a commencé la Révolution française ?",
+          "options": [
+            {
+              "label": "1789",
+              "correct": false
+            },
+            {
+              "label": "1789",
+              "correct": true
+            },
+            {
+              "label": "1799",
+              "correct": false
+            },
+            {
+              "label": "1804",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Qu'est-ce que la prise de la Bastille ?",
+          "options": [
+            {
+              "label": "Une fête",
+              "correct": false
+            },
+            {
+              "label": "Un événement symbolique du 14 juillet 1789 marquant le début de la Révolution",
+              "correct": true
+            },
+            {
+              "label": "Une bataille en province",
+              "correct": false
+            },
+            {
+              "label": "Un couronnement",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Quelles étaient les trois classes sociales (ordres) sous l'Ancien Régime ?",
+          "options": [
+            {
+              "label": "Le clergé, la noblesse et le Tiers État",
+              "correct": true
+            },
+            {
+              "label": "Les paysans, les bourgeois, les rois",
+              "correct": false
+            },
+            {
+              "label": "Les riches, les pauvres, les moyens",
+              "correct": false
+            },
+            {
+              "label": "Les ouvriers, les patrons, les artisans",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Qu'est-ce que la Déclaration des Droits de l'Homme et du Citoyen ?",
+          "options": [
+            {
+              "label": "Un livre de cuisine",
+              "correct": false
+            },
+            {
+              "label": "Un texte proclamant les droits fondamentaux (1789)",
+              "correct": true
+            },
+            {
+              "label": "Une loi sur les impôts",
+              "correct": false
+            },
+            {
+              "label": "Un traité de paix",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Quel roi a été guillotiné pendant la Révolution ?",
+          "options": [
+            {
+              "label": "Louis XIV",
+              "correct": false
+            },
+            {
+              "label": "Louis XVI",
+              "correct": true
+            },
+            {
+              "label": "Henri IV",
+              "correct": false
+            },
+            {
+              "label": "François Ier",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Qui était Napoléon Bonaparte ?",
+          "options": [
+            {
+              "label": "Un roi de France",
+              "correct": false
+            },
+            {
+              "label": "Un général devenu empereur des Français en 1804",
+              "correct": true
+            },
+            {
+              "label": "Un révolutionnaire",
+              "correct": false
+            },
+            {
+              "label": "Un philosophe",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Quelle devise vient de la Révolution française ?",
+          "options": [
+            {
+              "label": "Travail, Famille, Patrie",
+              "correct": false
+            },
+            {
+              "label": "Liberté, Égalité, Fraternité",
+              "correct": true
+            },
+            {
+              "label": "Force et Honneur",
+              "correct": false
+            },
+            {
+              "label": "Paix et Justice",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Qu'est-ce que la République ?",
+          "options": [
+            {
+              "label": "Un régime où il y a un roi",
+              "correct": false
+            },
+            {
+              "label": "Un régime où le pouvoir appartient au peuple et ses représentants élus",
+              "correct": true
+            },
+            {
+              "label": "Un empire",
+              "correct": false
+            },
+            {
+              "label": "Une dictature",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Quelle grande réforme de la Révolution a aboli les privilèges de la noblesse ?",
+          "options": [
+            {
+              "label": "L'Edit de Nantes",
+              "correct": false
+            },
+            {
+              "label": "Le sacre de Napoléon",
+              "correct": false
+            },
+            {
+              "label": "La nuit du 4 août 1789",
+              "correct": true
+            },
+            {
+              "label": "Le concordat",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Que fête-t-on le 14 juillet en France ?",
+          "options": [
+            {
+              "label": "La fin de la guerre",
+              "correct": false
+            },
+            {
+              "label": "La prise de la Bastille et la Fête nationale",
+              "correct": true
+            },
+            {
+              "label": "Le couronnement d'un roi",
+              "correct": false
+            },
+            {
+              "label": "La fin de l'Empire",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Mathematiques/fractions-decimaux-approfondis.md",
+      "sha256": "37a35bd615e0c1c3bda225362a4038515a71e60e3f8e505869b3711067fa7c27",
+      "metadata": {
+        "id": "CM2-MATH-01",
+        "matiere": "Mathématiques",
+        "niveau": "CM2",
+        "titre": "Fractions et décimaux approfondis",
+        "description": "Maîtrise les opérations avec les fractions et décimaux. Travail approfondi.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Quelle est la fraction irréductible de 6/8 ?",
+          "options": [
+            {
+              "label": "6/8",
+              "correct": false
+            },
+            {
+              "label": "3/4",
+              "correct": true
+            },
+            {
+              "label": "2/3",
+              "correct": false
+            },
+            {
+              "label": "1/2",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Combien font 1/4 + 1/2 ?",
+          "options": [
+            {
+              "label": "2/6",
+              "correct": false
+            },
+            {
+              "label": "3/4",
+              "correct": true
+            },
+            {
+              "label": "1/6",
+              "correct": false
+            },
+            {
+              "label": "2/4",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Comment transforme-t-on 3/5 en nombre décimal ?",
+          "options": [
+            {
+              "label": "0,3",
+              "correct": false
+            },
+            {
+              "label": "0,5",
+              "correct": false
+            },
+            {
+              "label": "0,6",
+              "correct": true
+            },
+            {
+              "label": "3,5",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Quel nombre est le plus grand : 0,75 ou 3/4 ?",
+          "options": [
+            {
+              "label": "0,75",
+              "correct": false
+            },
+            {
+              "label": "3/4",
+              "correct": false
+            },
+            {
+              "label": "Ils sont égaux",
+              "correct": true
+            },
+            {
+              "label": "On ne peut pas comparer",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Combien font 2,5 × 4 ?",
+          "options": [
+            {
+              "label": "8,5",
+              "correct": false
+            },
+            {
+              "label": "10",
+              "correct": true
+            },
+            {
+              "label": "6,5",
+              "correct": false
+            },
+            {
+              "label": "12",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Comment simplifie-t-on la fraction 12/16 ?",
+          "options": [
+            {
+              "label": "6/8",
+              "correct": false
+            },
+            {
+              "label": "3/4",
+              "correct": true
+            },
+            {
+              "label": "4/3",
+              "correct": false
+            },
+            {
+              "label": "12/16 ne se simplifie pas",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Que vaut 5,75 - 2,25 ?",
+          "options": [
+            {
+              "label": "3,25",
+              "correct": false
+            },
+            {
+              "label": "3,5",
+              "correct": true
+            },
+            {
+              "label": "3,75",
+              "correct": false
+            },
+            {
+              "label": "4",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Quelle fraction représente 0,25 ?",
+          "options": [
+            {
+              "label": "1/4",
+              "correct": true
+            },
+            {
+              "label": "1/2",
+              "correct": false
+            },
+            {
+              "label": "2/5",
+              "correct": false
+            },
+            {
+              "label": "1/3",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Combien font 3/4 de 20 ?",
+          "options": [
+            {
+              "label": "10",
+              "correct": false
+            },
+            {
+              "label": "15",
+              "correct": true
+            },
+            {
+              "label": "20",
+              "correct": false
+            },
+            {
+              "label": "5",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Comment range-t-on ces nombres du plus petit au plus grand : 0,5 ; 1/3 ; 0,75 ?",
+          "options": [
+            {
+              "label": "0,5 ; 0,75 ; 1/3",
+              "correct": false
+            },
+            {
+              "label": "1/3 ; 0,5 ; 0,75",
+              "correct": true
+            },
+            {
+              "label": "0,75 ; 0,5 ; 1/3",
+              "correct": false
+            },
+            {
+              "label": "1/3 ; 0,75 ; 0,5",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Mathematiques/geometrie-aires.md",
+      "sha256": "06b0d1989567cf78b6f32f2b7ce7bf5b71340adbff2cc8785043ed0c5e8e4820",
+      "metadata": {
+        "id": "CM2-MATH-02",
+        "matiere": "Mathématiques",
+        "niveau": "CM2",
+        "titre": "Géométrie : calculs d'aires",
+        "description": "Calcule les aires de différentes figures géométriques. Formules et propriétés.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Qu'est-ce que l'aire d'une figure ?",
+          "options": [
+            {
+              "label": "Son périmètre",
+              "correct": false
+            },
+            {
+              "label": "La surface qu'elle occupe",
+              "correct": true
+            },
+            {
+              "label": "Sa hauteur",
+              "correct": false
+            },
+            {
+              "label": "Son volume",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Quelle est la formule de l'aire d'un rectangle ?",
+          "options": [
+            {
+              "label": "Longueur + largeur",
+              "correct": false
+            },
+            {
+              "label": "Longueur × largeur",
+              "correct": true
+            },
+            {
+              "label": "(Longueur + largeur) × 2",
+              "correct": false
+            },
+            {
+              "label": "Longueur × 4",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Un rectangle mesure 8 cm de long et 5 cm de large. Quelle est son aire ?",
+          "options": [
+            {
+              "label": "13 cm²",
+              "correct": false
+            },
+            {
+              "label": "26 cm²",
+              "correct": false
+            },
+            {
+              "label": "40 cm²",
+              "correct": true
+            },
+            {
+              "label": "80 cm²",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Quelle est la formule de l'aire d'un carré de côté c ?",
+          "options": [
+            {
+              "label": "c × 2",
+              "correct": false
+            },
+            {
+              "label": "c × 4",
+              "correct": false
+            },
+            {
+              "label": "c × c (ou c²)",
+              "correct": true
+            },
+            {
+              "label": "c + c",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Un carré a un côté de 6 cm. Quelle est son aire ?",
+          "options": [
+            {
+              "label": "24 cm²",
+              "correct": false
+            },
+            {
+              "label": "36 cm²",
+              "correct": true
+            },
+            {
+              "label": "12 cm²",
+              "correct": false
+            },
+            {
+              "label": "18 cm²",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Quelle unité utilise-t-on pour mesurer une aire ?",
+          "options": [
+            {
+              "label": "Les mètres (m)",
+              "correct": false
+            },
+            {
+              "label": "Les mètres carrés (m²) ou centimètres carrés (cm²)",
+              "correct": true
+            },
+            {
+              "label": "Les litres (L)",
+              "correct": false
+            },
+            {
+              "label": "Les kilogrammes (kg)",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Comment calcule-t-on l'aire d'un triangle ?",
+          "options": [
+            {
+              "label": "Base × hauteur",
+              "correct": false
+            },
+            {
+              "label": "(Base × hauteur) ÷ 2",
+              "correct": true
+            },
+            {
+              "label": "Base + hauteur",
+              "correct": false
+            },
+            {
+              "label": "Base × 3",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Un triangle a une base de 10 cm et une hauteur de 6 cm. Quelle est son aire ?",
+          "options": [
+            {
+              "label": "60 cm²",
+              "correct": false
+            },
+            {
+              "label": "16 cm²",
+              "correct": false
+            },
+            {
+              "label": "30 cm²",
+              "correct": true
+            },
+            {
+              "label": "20 cm²",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Si on double le côté d'un carré, son aire est :",
+          "options": [
+            {
+              "label": "Doublée",
+              "correct": false
+            },
+            {
+              "label": "Multipliée par 4",
+              "correct": true
+            },
+            {
+              "label": "Triplée",
+              "correct": false
+            },
+            {
+              "label": "Divisée par 2",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Quelle figure a la plus grande aire : un carré de 5 cm de côté ou un rectangle de 6 cm sur 4 cm ?",
+          "options": [
+            {
+              "label": "Le carré (25 cm²)",
+              "correct": true
+            },
+            {
+              "label": "Le rectangle (24 cm²)",
+              "correct": false
+            },
+            {
+              "label": "Ils ont la même aire",
+              "correct": false
+            },
+            {
+              "label": "On ne peut pas calculer",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Mathematiques/problemes-complexes-donnees.md",
+      "sha256": "5df4ab72adb82a59d985272ed2cc067ab990ef8cc793893138017213ab80f3ca",
+      "metadata": {
+        "id": "CM2-MATH-03",
+        "matiere": "Mathématiques",
+        "niveau": "CM2",
+        "titre": "Problèmes complexes et gestion de données",
+        "description": "Résous des problèmes élaborés mobilisant plusieurs connaissances. Statistiques élémentaires.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Un magasin vend des cahiers à 2,50 € l'un. Paul achète 6 cahiers et paie avec un billet de 20 €. Combien lui rend-on ?",
+          "options": [
+            {
+              "label": "15 €",
+              "correct": false
+            },
+            {
+              "label": "7,50 €",
+              "correct": false
+            },
+            {
+              "label": "5 €",
+              "correct": true
+            },
+            {
+              "label": "10 €",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Dans une classe de 24 élèves, 1/3 sont des garçons. Combien y a-t-il de filles ?",
+          "options": [
+            {
+              "label": "8 filles",
+              "correct": false
+            },
+            {
+              "label": "16 filles",
+              "correct": true
+            },
+            {
+              "label": "12 filles",
+              "correct": false
+            },
+            {
+              "label": "18 filles",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Un train part à 14h35 et arrive à 17h10. Quelle est la durée du trajet ?",
+          "options": [
+            {
+              "label": "3h35",
+              "correct": false
+            },
+            {
+              "label": "2h25",
+              "correct": false
+            },
+            {
+              "label": "2h35",
+              "correct": true
+            },
+            {
+              "label": "3h25",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Qu'est-ce que la moyenne d'une série de nombres ?",
+          "options": [
+            {
+              "label": "Le nombre le plus grand",
+              "correct": false
+            },
+            {
+              "label": "La somme des nombres divisée par leur quantité",
+              "correct": true
+            },
+            {
+              "label": "Le nombre le plus petit",
+              "correct": false
+            },
+            {
+              "label": "Le nombre du milieu",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Calcule la moyenne de ces notes : 12, 14, 16, 18",
+          "options": [
+            {
+              "label": "14",
+              "correct": false
+            },
+            {
+              "label": "15",
+              "correct": true
+            },
+            {
+              "label": "16",
+              "correct": false
+            },
+            {
+              "label": "60",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Un rectangle a un périmètre de 30 cm et une longueur de 10 cm. Quelle est sa largeur ?",
+          "options": [
+            {
+              "label": "20 cm",
+              "correct": false
+            },
+            {
+              "label": "10 cm",
+              "correct": false
+            },
+            {
+              "label": "5 cm",
+              "correct": true
+            },
+            {
+              "label": "15 cm",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Marie a 3 fois plus de billes que Paul. Ensemble, ils ont 48 billes. Combien Paul a-t-il de billes ?",
+          "options": [
+            {
+              "label": "12 billes",
+              "correct": true
+            },
+            {
+              "label": "24 billes",
+              "correct": false
+            },
+            {
+              "label": "36 billes",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Un terrain rectangulaire mesure 15 m de long et 12 m de large. On veut l'entourer d'une clôture. Quelle longueur de clôture faut-il ?",
+          "options": [
+            {
+              "label": "27 m",
+              "correct": false
+            },
+            {
+              "label": "180 m",
+              "correct": false
+            },
+            {
+              "label": "54 m",
+              "correct": true
+            },
+            {
+              "label": "30 m",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Dans un graphique, on voit que Léa a vendu 15 gâteaux lundi et 23 mardi. Combien a-t-elle vendu en 2 jours ?",
+          "options": [
+            {
+              "label": "8 gâteaux",
+              "correct": false
+            },
+            {
+              "label": "38 gâteaux",
+              "correct": true
+            },
+            {
+              "label": "15 gâteaux",
+              "correct": false
+            },
+            {
+              "label": "23 gâteaux",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Pour résoudre un problème complexe, quelle est la meilleure méthode ?",
+          "options": [
+            {
+              "label": "Deviner la réponse",
+              "correct": false
+            },
+            {
+              "label": "Lire attentivement, identifier les données et les étapes de calcul",
+              "correct": true
+            },
+            {
+              "label": "Calculer tout de suite",
+              "correct": false
+            },
+            {
+              "label": "Ne rien faire",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Sciences/corps-humain-respiration-circulation.md",
+      "sha256": "c6c60003df1194981635fe5cf2192c1e2f664174dcf885a27800685ff84d447b",
+      "metadata": {
+        "id": "CM2-SCI-01",
+        "matiere": "Sciences",
+        "niveau": "CM2",
+        "titre": "Le corps humain : respiration et circulation",
+        "description": "Comprends le fonctionnement de la respiration et de la circulation sanguine. Vivant approfondi.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Quel est le rôle principal des poumons ?",
+          "options": [
+            {
+              "label": "Digérer les aliments",
+              "correct": false
+            },
+            {
+              "label": "Permettre les échanges gazeux (O₂ et CO₂)",
+              "correct": true
+            },
+            {
+              "label": "Faire battre le cœur",
+              "correct": false
+            },
+            {
+              "label": "Filtrer le sang",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Que se passe-t-il lors de l'inspiration ?",
+          "options": [
+            {
+              "label": "On rejette du CO₂",
+              "correct": false
+            },
+            {
+              "label": "On fait entrer de l'air riche en oxygène dans les poumons",
+              "correct": true
+            },
+            {
+              "label": "On arrête de respirer",
+              "correct": false
+            },
+            {
+              "label": "Le cœur s'arrête",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Quel gaz le sang apporte-t-il aux organes ?",
+          "options": [
+            {
+              "label": "Le dioxyde de carbone (CO₂)",
+              "correct": false
+            },
+            {
+              "label": "L'oxygène (O₂)",
+              "correct": true
+            },
+            {
+              "label": "L'azote",
+              "correct": false
+            },
+            {
+              "label": "L'hélium",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Quel est le rôle du cœur ?",
+          "options": [
+            {
+              "label": "Filtrer l'air",
+              "correct": false
+            },
+            {
+              "label": "Pomper le sang dans tout le corps",
+              "correct": true
+            },
+            {
+              "label": "Digérer la nourriture",
+              "correct": false
+            },
+            {
+              "label": "Produire de l'oxygène",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Comment s'appellent les vaisseaux qui transportent le sang du cœur vers les organes ?",
+          "options": [
+            {
+              "label": "Les artères",
+              "correct": true
+            },
+            {
+              "label": "Les veines",
+              "correct": false
+            },
+            {
+              "label": "Les poumons",
+              "correct": false
+            },
+            {
+              "label": "Les bronches",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Comment s'appellent les vaisseaux qui ramènent le sang vers le cœur ?",
+          "options": [
+            {
+              "label": "Les artères",
+              "correct": false
+            },
+            {
+              "label": "Les veines",
+              "correct": true
+            },
+            {
+              "label": "Les poumons",
+              "correct": false
+            },
+            {
+              "label": "Les muscles",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Combien de battements par minute fait le cœur d'un enfant au repos environ ?",
+          "options": [
+            {
+              "label": "20 battements",
+              "correct": false
+            },
+            {
+              "label": "50 battements",
+              "correct": false
+            },
+            {
+              "label": "70 à 90 battements",
+              "correct": true
+            },
+            {
+              "label": "200 battements",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Que rejette-t-on lors de l'expiration ?",
+          "options": [
+            {
+              "label": "De l'oxygène seulement",
+              "correct": false
+            },
+            {
+              "label": "De l'air riche en dioxyde de carbone (CO₂)",
+              "correct": true
+            },
+            {
+              "label": "De l'eau",
+              "correct": false
+            },
+            {
+              "label": "Rien du tout",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Pourquoi le sang circule-t-il dans le corps ?",
+          "options": [
+            {
+              "label": "Pour rien",
+              "correct": false
+            },
+            {
+              "label": "Pour apporter oxygène et nutriments aux organes et éliminer les déchets",
+              "correct": true
+            },
+            {
+              "label": "Pour faire du bruit",
+              "correct": false
+            },
+            {
+              "label": "Pour digérer",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Que se passe-t-il quand on fait du sport ?",
+          "options": [
+            {
+              "label": "Le cœur bat moins vite",
+              "correct": false
+            },
+            {
+              "label": "Le cœur bat plus vite et on respire plus vite",
+              "correct": true
+            },
+            {
+              "label": "On arrête de respirer",
+              "correct": false
+            },
+            {
+              "label": "Le sang s'arrête",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upstream_path": "content/qcm/CM2/Sciences/environnement-developpement-durable.md",
+      "sha256": "91e66674cdafb2ef937288bc557695a0951e2861a9db60f2895df9f099bf8123",
+      "metadata": {
+        "id": "CM2-SCI-02",
+        "matiere": "Sciences",
+        "niveau": "CM2",
+        "titre": "Environnement et développement durable",
+        "description": "Comprends les enjeux environnementaux et les gestes éco-responsables. Démarche d'investigation.",
+        "difficulte": "4",
+        "points": "30"
+      },
+      "questions": [
+        {
+          "ordinal": 1,
+          "prompt": "Qu'est-ce que le développement durable ?",
+          "options": [
+            {
+              "label": "Construire plus de bâtiments",
+              "correct": false
+            },
+            {
+              "label": "Répondre aux besoins actuels sans compromettre ceux des générations futures",
+              "correct": true
+            },
+            {
+              "label": "Utiliser toutes les ressources rapidement",
+              "correct": false
+            },
+            {
+              "label": "Ne rien faire",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "prompt": "Qu'est-ce que la pollution ?",
+          "options": [
+            {
+              "label": "L'air pur",
+              "correct": false
+            },
+            {
+              "label": "La présence dans l'environnement de substances nuisibles",
+              "correct": true
+            },
+            {
+              "label": "Le recyclage",
+              "correct": false
+            },
+            {
+              "label": "L'eau propre",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "prompt": "Quel est un exemple d'énergie renouvelable ?",
+          "options": [
+            {
+              "label": "Le pétrole",
+              "correct": false
+            },
+            {
+              "label": "Le charbon",
+              "correct": false
+            },
+            {
+              "label": "L'énergie solaire",
+              "correct": true
+            },
+            {
+              "label": "Le gaz naturel",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 4,
+          "prompt": "Pourquoi faut-il trier ses déchets ?",
+          "options": [
+            {
+              "label": "Pour perdre du temps",
+              "correct": false
+            },
+            {
+              "label": "Pour recycler et réutiliser les matériaux",
+              "correct": true
+            },
+            {
+              "label": "Ce n'est pas important",
+              "correct": false
+            },
+            {
+              "label": "Pour faire joli",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 5,
+          "prompt": "Qu'est-ce que l'effet de serre ?",
+          "options": [
+            {
+              "label": "Un jardin",
+              "correct": false
+            },
+            {
+              "label": "Le réchauffement de l'atmosphère terrestre dû aux gaz",
+              "correct": true
+            },
+            {
+              "label": "Une maison en verre",
+              "correct": false
+            },
+            {
+              "label": "Un type de pollution de l'eau",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 6,
+          "prompt": "Quel geste permet d'économiser l'eau ?",
+          "options": [
+            {
+              "label": "Laisser couler l'eau en se brossant les dents",
+              "correct": false
+            },
+            {
+              "label": "Fermer le robinet quand on ne l'utilise pas",
+              "correct": true
+            },
+            {
+              "label": "Prendre des bains très longs",
+              "correct": false
+            },
+            {
+              "label": "Arroser le jardin à midi en plein soleil",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 7,
+          "prompt": "Que signifie \"recycler\" ?",
+          "options": [
+            {
+              "label": "Jeter les déchets n'importe où",
+              "correct": false
+            },
+            {
+              "label": "Transformer des déchets en nouvelles matières premières",
+              "correct": true
+            },
+            {
+              "label": "Brûler les déchets",
+              "correct": false
+            },
+            {
+              "label": "Enterrer les déchets",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 8,
+          "prompt": "Quelle est une conséquence de la déforestation ?",
+          "options": [
+            {
+              "label": "Moins d'arbres pour produire de l'oxygène et abriter les animaux",
+              "correct": true
+            },
+            {
+              "label": "Plus d'oxygène",
+              "correct": false
+            },
+            {
+              "label": "Plus d'animaux",
+              "correct": false
+            },
+            {
+              "label": "Aucune conséquence",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 9,
+          "prompt": "Comment peut-on réduire la pollution de l'air en ville ?",
+          "options": [
+            {
+              "label": "Utiliser plus de voitures",
+              "correct": false
+            },
+            {
+              "label": "Utiliser les transports en commun, le vélo ou marcher",
+              "correct": true
+            },
+            {
+              "label": "Brûler plus de charbon",
+              "correct": false
+            },
+            {
+              "label": "Construire plus d'usines",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "ordinal": 10,
+          "prompt": "Qu'est-ce qu'une espèce en voie de disparition ?",
+          "options": [
+            {
+              "label": "Une espèce très nombreuse",
+              "correct": false
+            },
+            {
+              "label": "Une espèce animale ou végétale qui risque de disparaître",
+              "correct": true
+            },
+            {
+              "label": "Une nouvelle espèce",
+              "correct": false
+            },
+            {
+              "label": "Une espèce imaginaire",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "publication": "staged_only_independent_human_review_required"
+}

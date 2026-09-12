@@ -1,0 +1,109 @@
+{
+  "id": "898f4037f0f84333",
+  "name": "ÉDUCAPILOTE — weekly_reports",
+  "active": false,
+  "nodes": [
+    {
+      "id": "e347733a-0ec5-4768-b3d9-e6ec77ee0041",
+      "name": "Horaire",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "95c57320-a4ed-4acd-aee5-25c07a3ab34f",
+      "name": "Webhook authentifié",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        200
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "educapilote-weekly_reports",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "educapilote-inbound",
+          "name": "Educapilote webhook entrant"
+        }
+      }
+    },
+    {
+      "id": "e3aa769f-1483-4dbe-b049-9a891d95ea58",
+      "name": "Soumettre tâche",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        300,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://notification-service:8000/automation/jobs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {kind: 'weekly_reports', idempotency_key: '00000000-0000-4000-8001-' + $now.toFormat('yyyyMMdd') + '0000', generations: []} }}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "educapilote-outbound",
+          "name": "Educapilote automatisation établissement"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Horaire": {
+      "main": [
+        [
+          {
+            "node": "Soumettre tâche",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook authentifié": {
+      "main": [
+        [
+          {
+            "node": "Soumettre tâche",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "saveDataSuccessExecution": "none",
+    "saveDataErrorExecution": "none",
+    "saveManualExecutions": false
+  }
+}

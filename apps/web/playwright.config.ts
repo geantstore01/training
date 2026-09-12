@@ -1,0 +1,3 @@
+import {defineConfig} from "@playwright/test";
+import path from "node:path";
+export default defineConfig({testDir:"tests/browser",testMatch:"*.spec.ts",testIgnore:"cm2.spec.ts",workers:1,timeout:45000,reporter:"list",use:{baseURL:"http://127.0.0.1:3000",channel:"msedge",headless:true,trace:"retain-on-failure"},webServer:[{command:"node tests/browser/backend.mjs",port:19091,reuseExistingServer:false},{command:"npm run start -- --hostname 127.0.0.1",port:3000,timeout:120000,reuseExistingServer:false,env:{LOGIN_SCHOOL_ID:"00000000-0000-4000-8000-000000000009",COOKIE_SECURE:"false",WEB_ORIGINS:"http://127.0.0.1:3000",REDIS_URL:"redis://127.0.0.1:16379",REDIS_PASSWORD_FILE:path.resolve("../../secrets/redis_web"),BACKEND_BASE:"http://127.0.0.1:19091"}}]});

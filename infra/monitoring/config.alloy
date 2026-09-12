@@ -1,0 +1,27 @@
+logging {
+  level = "warn"
+}
+local.file_match "edu" {
+  path_targets = [{"__path__" = "/logs/*/*.jsonl", "job" = "educapilote"}]
+}
+loki.source.file "edu" {
+  targets = local.file_match.edu.targets
+  forward_to = [loki.process.edu.receiver]
+}
+loki.process "edu" {
+  stage.json {
+    expressions = {service = "service", status = "status"}
+  }
+  stage.labels {
+    values = {service = "", status = ""}
+  }
+  stage.label_drop {
+    values = ["filename"]
+  }
+  forward_to = [loki.write.local.receiver]
+}
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}

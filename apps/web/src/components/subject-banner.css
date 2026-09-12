@@ -1,0 +1,32 @@
+.subject-banner{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(18px,3vw,34px);align-items:center;border-radius:24px;padding:clamp(18px,3vw,30px);margin:0 0 26px;border:2px solid #c7dcdf;overflow:hidden}
+.subject-banner-francais{background:#fbe8df}
+.subject-banner-mathematiques{background:#e4f1f6}
+.subject-banner-sciences{background:#e4f2e8}
+.subject-banner-copy{min-width:0}
+.subject-banner-copy>h2{font-size:clamp(1.5rem,2.6vw,2.1rem);margin:.4rem 0 .6rem}
+.subject-banner-copy>p:not(.subject-banner-kicker){color:#2c4a52;margin:0 0 .9rem}
+.subject-banner-francais .subject-banner-copy>h2{color:#7c3a28}
+.subject-banner-mathematiques .subject-banner-copy>h2{color:#14506a}
+.subject-banner-sciences .subject-banner-copy>h2{color:#2a5736}
+.subject-banner-kicker{display:inline-flex;align-items:center;gap:8px;font-family:Nunito,sans-serif;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;background:white;border-radius:999px;padding:6px 14px;margin:0;box-shadow:0 2px 6px #183e4914}
+.subject-banner-francais .subject-banner-kicker{color:#a94d37}
+.subject-banner-mathematiques .subject-banner-kicker{color:#176179}
+.subject-banner-sciences .subject-banner-kicker{color:#356c46}
+.subject-banner-steps{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0}
+.subject-banner-steps li{display:inline-flex;align-items:center;gap:7px;background:#ffffffb8;border-radius:999px;padding:5px 13px 5px 6px;font-weight:700;font-size:.86rem;color:#183e49;backdrop-filter:blur(3px)}
+.subject-banner-steps li span{display:grid;place-items:center;width:26px;height:26px;border-radius:999px;background:#126c70;color:white;font-family:Nunito,sans-serif;font-size:.78rem}
+.subject-banner-francais .subject-banner-steps li span{background:#a94d37}
+.subject-banner-mathematiques .subject-banner-steps li span{background:#176179}
+.subject-banner-sciences .subject-banner-steps li span{background:#356c46}
+.subject-banner-figure{position:relative;min-width:0}
+.subject-banner-figure img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;border-radius:16px;border:5px solid white;box-shadow:0 10px 24px #183e4926}
+@media (max-width:860px){
+  .subject-banner{grid-template-columns:1fr;gap:14px;padding:14px}
+  .subject-banner-figure{order:-1}
+  .subject-banner-figure img{border-width:4px;aspect-ratio:5/3}
+  .subject-banner-copy>p:not(.subject-banner-kicker){font-size:.95rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  .subject-banner-figure img{transform:rotate(-1.2deg);transition:transform .25s ease}
+  .subject-banner:hover .subject-banner-figure img{transform:rotate(0deg) scale(1.015)}
+}

@@ -1,0 +1,14 @@
+ALTER TABLE ai_interactions NO FORCE ROW LEVEL SECURITY;
+UPDATE ai_interactions SET cost_eur=0 WHERE cost_eur IS NULL;
+ALTER TABLE ai_interactions ALTER COLUMN cost_eur SET NOT NULL;
+ALTER TABLE ai_interactions FORCE ROW LEVEL SECURITY;
+REVOKE SELECT ON schools,user_roles FROM edu_ai_router,edu_retrieval,edu_tutor;
+REVOKE SELECT(id,tenant_id,status,auth_version,deleted_at) ON users FROM edu_ai_router,edu_retrieval,edu_tutor;
+REVOKE SELECT ON students,exercise_attempts,learning_sessions,exercise_competencies FROM edu_ai_router;
+REVOKE SELECT ON exercise_attempts,exercise_competencies FROM edu_tutor;
+REVOKE UPDATE(max_hint_level) ON exercise_attempts FROM edu_tutor;
+DROP TABLE tutor_turns;
+DROP TABLE rag_reviews;
+DROP TABLE rag_passages;
+DROP TABLE rag_documents;
+DROP FUNCTION edu_rag_snapshot(),edu_rag_review(),edu_rag_passage();

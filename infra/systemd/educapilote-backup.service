@@ -1,0 +1,17 @@
+[Unit]
+Description=Educapilote encrypted PostgreSQL backup
+Requires=docker.service
+After=docker.service
+[Service]
+Type=oneshot
+WorkingDirectory=/stockage/training
+Environment=EDU_COMPOSE_FILE=docker-compose.dev.yml
+ExecStart=/bin/bash /stockage/training/scripts/backup_production.sh
+UMask=0077
+Nice=10
+TimeoutStartSec=1h
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/stockage/training/backups /stockage/training/runtime/metrics

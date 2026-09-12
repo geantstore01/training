@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Carte interactive de l'architecture ÉDUCAPILOTE.">
+  <title>ÉDUCAPILOTE · Carte du système</title>
+  <style>
+    :root { --night:#07313a; --deep:#041d25; --sea:#0c6870; --foam:#dff5ef; --sun:#f4c850; --coral:#f27a67; --ink:#133037; --line:rgba(7,49,58,.14); }
+    * { box-sizing:border-box; }
+    html { background:var(--foam); scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); font-family:ui-rounded, "Aptos", "Trebuchet MS", sans-serif; line-height:1.55; }
+    button { font:inherit; }
+    .masthead { min-height:100svh; position:relative; overflow:hidden; background:radial-gradient(circle at 80% 14%, #177b80 0 8%, transparent 25%), linear-gradient(135deg,var(--deep),var(--night)); color:#fff; display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,1.2fr); align-items:stretch; }
+    .intro { padding:clamp(2rem,7vw,7.5rem); z-index:2; display:flex; flex-direction:column; justify-content:center; max-width:800px; }
+    .kicker { text-transform:uppercase; letter-spacing:.14em; font-weight:800; font-size:.75rem; color:var(--sun); margin:0 0 1rem; }
+    h1 { font-size:clamp(3rem,7vw,7.2rem); letter-spacing:-.075em; line-height:.88; margin:.1em 0 .35em; max-width:9ch; }
+    .lede { max-width:42ch; font-size:clamp(1rem,1.5vw,1.25rem); color:#d9eeeb; }
+    .legend { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:2.2rem; }
+    .chip { border:1px solid rgba(255,255,255,.24); border-radius:999px; padding:.38rem .7rem; font-size:.82rem; background:rgba(255,255,255,.08); }
+    .scene-wrap { min-height:56vh; position:relative; }
+    #scene { width:100%; height:100%; position:absolute; inset:0; cursor:grab; outline:none; }
+    #scene:focus-visible { outline:3px solid var(--sun); outline-offset:-6px; }
+    .scene-note { position:absolute; right:1.5rem; bottom:1.25rem; font-size:.78rem; background:rgba(4,29,37,.78); padding:.5rem .8rem; border-radius:99px; color:#d9eeeb; pointer-events:none; }
+    main { max-width:1240px; padding:clamp(3rem,7vw,6.5rem) clamp(1.25rem,5vw,4.5rem); margin:auto; }
+    .chapter { display:grid; grid-template-columns:13rem 1fr; gap:2rem; padding:3.5rem 0; border-top:1px solid var(--line); }
+    .chapter h2 { font-size:1rem; text-transform:uppercase; letter-spacing:.09em; margin:.3rem 0; color:var(--sea); }
+    .chapter h3 { margin:.2rem 0 .55rem; font-size:clamp(1.6rem,3vw,2.8rem); letter-spacing:-.045em; line-height:1.04; }
+    .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.5rem; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:1.3rem; padding:1.25rem; box-shadow:0 12px 28px rgba(5,51,57,.06); }
+    .card h4 { margin:.1rem 0 .55rem; font-size:1.1rem; }
+    .card p { margin:0; font-size:.94rem; }
+    .explorer { display:grid; grid-template-columns:minmax(14rem,.75fr) minmax(0,1.8fr); border:1px solid var(--line); background:#fff; border-radius:1.6rem; overflow:hidden; margin-top:1.5rem; }
+    .node-list { padding:1rem; background:#f5fbf8; display:grid; align-content:start; gap:.4rem; }
+    .node { appearance:none; width:100%; text-align:left; padding:.75rem .85rem; cursor:pointer; border:0; border-radius:.75rem; background:transparent; color:var(--ink); font-weight:700; }
+    .node:hover,.node[aria-pressed="true"] { background:var(--night); color:white; }
+    .detail { padding:clamp(1.3rem,3vw,2.5rem); min-height:19rem; }
+    .detail .type { color:var(--coral); font-weight:800; letter-spacing:.1em; text-transform:uppercase; font-size:.73rem; }
+    .detail h3 { margin:.25rem 0 .8rem; }
+    .detail ul { padding-left:1.1rem; }
+    .flow { background:var(--night); color:white; border-radius:1.6rem; padding:clamp(1.4rem,4vw,3rem); margin-top:1.5rem; }
+    .flow ol { display:grid; grid-template-columns:repeat(6,1fr); list-style:none; padding:0; gap:.7rem; counter-reset:steps; }
+    .flow li { min-height:9rem; border-left:1px solid rgba(223,245,239,.32); padding:0 0 0 .8rem; counter-increment:steps; }
+    .flow li::before { content:"0" counter(steps); display:block; color:var(--sun); font-weight:900; font-size:1.05rem; margin-bottom:.8rem; }
+    .flow strong { display:block; line-height:1.15; }
+    .flow span { color:#d6eae6; display:block; font-size:.82rem; margin-top:.45rem; }
+    .status { margin-top:1.5rem; padding:1.1rem 1.2rem; border-left:5px solid var(--coral); background:#fff2ee; border-radius:.35rem 1rem 1rem .35rem; }
+    footer { background:#041d25; color:#d6eae6; padding:2rem max(1.25rem,calc((100vw - 1150px)/2)); font-size:.9rem; }
+    footer p { max-width:72ch; margin:.2rem 0; }
+    @media (max-width:820px) { .masthead { grid-template-columns:1fr; } .intro { min-height:52svh; } .scene-wrap { min-height:50svh; } .chapter { grid-template-columns:1fr; gap:.6rem; padding:2.5rem 0; } .cards { grid-template-columns:1fr; } .explorer { grid-template-columns:1fr; } .flow ol { grid-template-columns:repeat(2,1fr); } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <section class="intro">
+      <p class="kicker">CM1 · CM2 · Cycle 3</p>
+      <h1>Chaque élève suit son propre cap.</h1>
+      <p class="lede">ÉDUCAPILOTE relie les missions préparées par l'enseignant, les activités de l'élève, l'accompagnement socratique de Capitaine Savoir et un suivi parent bienveillant.</p>
+      <div class="legend" aria-label="Repères de la carte"><span class="chip">● Espaces humains</span><span class="chip">● Cœur pédagogique</span><span class="chip">● Protection & IA</span><span class="chip">● Infrastructure</span></div>
+    </section>
+    <section class="scene-wrap" aria-label="Visualisation 3D interactive de l'architecture">
+      <canvas id="scene" tabindex="0" aria-label="Carte 3D : faites glisser pour tourner, utilisez la molette pour zoomer, cliquez un point pour obtenir sa description"></canvas>
+      <span class="scene-note">Glisser · zoomer · cliquer un point</span>
+    </section>
+  </header>
+  <main>
+    <section class="chapter">
+      <h2>La promesse</h2>
+      <div><h3>Apprendre sans raccourcir le chemin.</h3><p>La plateforme met l'accent sur les méthodes, les essais et la progression. Elle n'affiche pas de classement public ou de note anxiogène. Les contenus et les exercices sont validés par des personnes avant de devenir accessibles aux élèves.</p>
+        <div class="cards"><article class="card"><h4>Pour l'élève</h4><p>Des missions, des exercices interactifs, une aide progressive et une lecture audio des consignes.</p></article><article class="card"><h4>Pour le parent</h4><p>Un suivi qualitatif, des rapports internes et le contrôle des consentements.</p></article><article class="card"><h4>Pour l'enseignant</h4><p>Des classes, groupes, missions et réglages d'aide par élève.</p></article></div>
+      </div>
+    </section>
+    <section class="chapter">
+      <h2>Carte du système</h2>
+      <div><h3>Cliquer un composant pour comprendre son rôle.</h3><p>La carte 3D du haut montre les grands échanges. Cette liste donne le détail précis de chaque zone, sans exposer les API ou les données personnelles au navigateur.</p>
+        <div class="explorer"><nav class="node-list" aria-label="Composants de l'architecture" id="nodes"></nav><article class="detail" id="detail" aria-live="polite"></article></div>
+      </div>
+    </section>
+    <section class="chapter">
+      <h2>Un parcours élève</h2>
+      <div><h3>Une mission est un chemin, pas un score.</h3><div class="flow"><ol><li><strong>Découvrir</strong><span>Une mission préparée pour la classe ou le groupe.</span></li><li><strong>Comprendre</strong><span>Une leçon approuvée, quand elle est associée.</span></li><li><strong>Essayer</strong><span>Des activités interactives et un essai libre non enregistré.</span></li><li><strong>S'entraîner</strong><span>Un exercice guidé, avec indices si les règles le permettent.</span></li><li><strong>Agir seul</strong><span>Un exercice autonome, sans tuteur dans l'écran.</span></li><li><strong>Revenir</strong><span>Un bilan qualitatif nourrit répétition espacée et suivi.</span></li></ol></div></div>
+    </section>
+    <section class="chapter">
+      <h2>Les garde-fous</h2>
+      <div><h3>La sécurité est vérifiée avant l'aide, pas après.</h3><div class="cards"><article class="card"><h4>Accès</h4><p>Rôles, établissements séparés, session opaque navigateur et permissions revérifiées côté serveur.</p></article><article class="card"><h4>Données mineurs</h4><p>Liens parent-enfant vérifiés, consentements historisés, assentiment séparé et pseudonymes élève.</p></article><article class="card"><h4>IA encadrée</h4><p>Filtre PII, dix couches de sûreté, contenus validés, quotas et refus des réponses directes aux devoirs.</p></article></div></div>
+    </section>
+    <section class="chapter">
+      <h2>Exploitation</h2>
+      <div><h3>Le VPS surveille l'application sans surveiller les enfants.</h3><p>Prometheus, Grafana, Loki et les alertes mesurent la santé technique : disponibilité, latence, erreurs, ressources du serveur, GPU, tokens IA et sauvegardes. Les journaux de supervision sont filtrés : ils ne contiennent pas de conversations, jetons, cookies, noms ou adresses.</p><p class="status"><strong>État actuel :</strong> l'accès est privé sur le VPS. Le domaine public, le certificat Let's Encrypt, un DSN Sentry, une sauvegarde hors site et les validations humaines RGPD restent nécessaires avant une ouverture à des mineurs.</p></div>
+    </section>
+  </main>
+  <footer><p>Cette page décrit l'implémentation ÉDUCAPILOTE livrée : 15 microservices FastAPI, frontend Next.js, PostgreSQL/pgvector, Redis, Ollama, sécurité, observabilité et sauvegardes.</p><p>La visualisation utilise <strong>Three.js</strong> — interprétation de « treed.js ». La bibliothèque est chargée depuis un CDN.</p></footer>
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js';
+
+    const items = [
+      {id:'spaces', name:'Les trois espaces', type:'Personnes', color:'#f4c850', p:[-4,1.4,0], text:'Les pages Next.js guident les élèves vers leurs missions, les parents vers le suivi des enfants autorisés et les enseignants vers leurs classes. Le navigateur ne reçoit jamais les JWT.', bullets:['Élève : missions, activités, tuteur et audio','Parent : progrès, rapports, consentements','Enseignant : classes, groupes, missions et limites d’aide']},
+      {id:'gateway', name:'Frontend & BFF', type:'Accès web', color:'#57c5c7', p:[-1.8,.4,0], text:'Le frontend Next.js sert les interfaces et joue le rôle de BFF : il joint les services depuis le serveur, avec une liste fermée de routes. La session navigateur est un identifiant opaque stocké en cookie.', bullets:['Cookie HttpOnly et SameSite Strict','CSRF vérifié sur les mutations','CSP avec nonce et réponses privées non mises en cache']},
+      {id:'learning', name:'Cœur pédagogique', type:'Apprentissage', color:'#f27a67', p:[.4,1.25,0], text:'Les services curriculum, content, exercise et assessment structurent les compétences, valident les contenus, corrigent les exercices et organisent la répétition espacée.', bullets:['Compétences Cycle 3 et prérequis','Versions de leçons et exercices avec validation humaine','Correction déterministe et état qualitatif de progression']},
+      {id:'captain', name:'Capitaine Savoir', type:'Aide socratique', color:'#a89ae5', p:[2.45,.2,0], text:'Le tuteur aide à trouver une méthode en six niveaux. Il s’appuie sur des sources approuvées et ne donne pas directement la réponse attendue à un devoir.', bullets:['Réponse JSON pédagogique structurée','Plafond ou suspension réglés par l’enseignant','Consentement et assentiment contrôlés avant aide IA']},
+      {id:'safety', name:'Sécurité & IA', type:'Protection', color:'#69c98c', p:[2.5,2.25,0], text:'Safety masque les données personnelles et applique dix couches de contrôle. Retrieval cherche dans les documents validés ; AI Router appelle Ollama Cloud seulement après ces contrôles.', bullets:['PII : nom, école, adresse, e-mail anonymisés','RAG hybride PostgreSQL plein texte + pgvector','Quota par établissement et circuit de protection fournisseur']},
+      {id:'school', name:'Vie scolaire', type:'Organisation', color:'#f8a75d', p:[.25,-1.7,0], text:'Class, analytics, notification, speech et admin transforment le travail pédagogique en missions, suivi qualitatif, rapports internes, audio et modération.', bullets:['Groupes et missions du jour','Rapports internes, alertes de difficulté et jobs durables','Audio eSpeak français sans fichier temporaire']},
+      {id:'data', name:'Données privées', type:'Stockage', color:'#6ca6da', p:[-2.05,-1.55,0], text:'PostgreSQL avec pgvector et Redis servent les données métier, les règles d’accès, les sessions et les files. Les établissements sont isolés et les comptes de services séparés.', bullets:['RLS par établissement','Profils sensibles chiffrés','Refresh tokens et sessions serveur dans Redis']},
+      {id:'ops', name:'Exploitation', type:'VPS', color:'#eef6f4', p:[4,-1.5,0], text:'Traefik, Prometheus, Grafana, Loki, Alloy, Node Exporter et les scripts de sauvegarde surveillent et protègent le fonctionnement technique.', bullets:['Métriques et logs techniques minimisés','Backups PostgreSQL chiffrés avec age','Ollama local GPU optionnel sur RTX 4070']}
+    ];
+    const links = [['spaces','gateway'],['gateway','learning'],['gateway','captain'],['gateway','school'],['learning','data'],['captain','safety'],['safety','data'],['school','data'],['ops','gateway'],['ops','data']];
+    const nav = document.querySelector('#nodes'), detail = document.querySelector('#detail');
+    let current = 'spaces';
+    function show(id) { const x = items.find(i=>i.id===id); current=id; detail.innerHTML=`<p class="type">${x.type}</p><h3>${x.name}</h3><p>${x.text}</p><ul>${x.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`; [...nav.children].forEach(b=>b.setAttribute('aria-pressed', b.dataset.id===id)); }
+    items.forEach(x=>{ const b=document.createElement('button'); b.className='node'; b.dataset.id=x.id; b.textContent=x.name; b.onclick=()=>show(x.id); nav.append(b); }); show(current);
+    const canvas = document.querySelector('#scene');
+    const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(42, 1, .1, 100); camera.position.set(0,0,12);
+    const renderer = new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.outputColorSpace=THREE.SRGBColorSpace;
+    const controls = new OrbitControls(camera,canvas); controls.enableDamping=true; controls.enablePan=false; controls.minDistance=7; controls.maxDistance=17;
+    const group = new THREE.Group(); scene.add(group); const meshById = new Map(); const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2();
+    const geometry = new THREE.IcosahedronGeometry(.42,3);
+    items.forEach(x=>{ const mesh=new THREE.Mesh(geometry,new THREE.MeshStandardMaterial({color:x.color,emissive:x.color,emissiveIntensity:.18,roughness:.28,metalness:.1})); mesh.position.set(...x.p); mesh.userData.id=x.id; group.add(mesh); meshById.set(x.id,mesh); const label=document.createElement('div'); mesh.userData.label=label; });
+    links.forEach(([a,b])=>{ const pa=meshById.get(a).position,pb=meshById.get(b).position; const g=new THREE.BufferGeometry().setFromPoints([pa,pb]); group.add(new THREE.Line(g,new THREE.LineBasicMaterial({color:0x8edbd3,transparent:true,opacity:.48}))); });
+    group.add(new THREE.AmbientLight(0xffffff,1.5)); const light=new THREE.PointLight(0xf4c850,28,20); light.position.set(-2,3,5); group.add(light);
+    const stars=new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(Array.from({length:260},()=>[(Math.random()-.5)*17,(Math.random()-.5)*12,(Math.random()-.5)*8]).flat(),3)),new THREE.PointsMaterial({color:0xb5e7df,size:.025})); scene.add(stars);
+    function resize(){ const r=canvas.getBoundingClientRect(); renderer.setSize(r.width,r.height,false); camera.aspect=r.width/r.height; camera.updateProjectionMatrix(); } new ResizeObserver(resize).observe(canvas); resize();
+    canvas.addEventListener('click',e=>{ const r=canvas.getBoundingClientRect(); pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1); raycaster.setFromCamera(pointer,camera); const hit=raycaster.intersectObjects([...meshById.values()])[0]; if(hit)show(hit.object.userData.id); });
+    function render(t){ const selected=meshById.get(current); for(const [id,m] of meshById){ const active=id===current; m.scale.setScalar(active?1.35:1); m.material.emissiveIntensity=active?.55:.18; } group.rotation.y=Math.sin(t*.00018)*.09; controls.update(); renderer.render(scene,camera); requestAnimationFrame(render); } requestAnimationFrame(render);
+  </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+name: educapilote
+services:
+  auth-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/auth-service:/var/log/edu
+  user-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/user-service:/var/log/edu
+  class-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/class-service:/var/log/edu
+  curriculum-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/curriculum-service:/var/log/edu
+  content-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/content-service:/var/log/edu
+  exercise-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/exercise-service:/var/log/edu
+  assessment-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/assessment-service:/var/log/edu
+  tutor-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/tutor-service:/var/log/edu
+  retrieval-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/retrieval-service:/var/log/edu
+  speech-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/speech-service:/var/log/edu
+  notification-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/notification-service:/var/log/edu
+  analytics-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/analytics-service:/var/log/edu
+  admin-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/admin-service:/var/log/edu
+  safety-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+    volumes:
+    - ./runtime/telemetry/safety-service:/var/log/edu
+  ai-router-service:
+    environment:
+      EDU_TELEMETRY_LOG_DIR: /var/log/edu
+      EDU_AI_INPUT_EUR_PER_MILLION: ${EDU_AI_INPUT_EUR_PER_MILLION:-}
+      EDU_AI_OUTPUT_EUR_PER_MILLION: ${EDU_AI_OUTPUT_EUR_PER_MILLION:-}
+    volumes:
+    - ./runtime/telemetry/ai-router-service:/var/log/edu
+  prometheus:
+    image: prom/prometheus:v3.14.0@sha256:5ce7540c3c00ef4ab0c9d2c995c6a5b9c421f44b4a115d97a2c7af3b1c21cbb0
+    restart: unless-stopped
+    networks:
+    - monitoring
+    - backend
+    - operations_access
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 512m
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    user: 65534:65534
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.path=/prometheus
+    - --storage.tsdb.retention.time=15d
+    - --storage.tsdb.retention.size=2GB
+    volumes:
+    - ./infra/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    - ./infra/monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro
+    - prometheus_data:/prometheus
+    ports:
+    - 127.0.0.1:19090:9090
+    depends_on:
+      monitoring-init:
+        condition: service_completed_successfully
+  grafana:
+    image: grafana/grafana:13.2.1@sha256:f772d434e8fab0049deb2b1b30abd43342bcfca1537614aa8d36080232cf4283
+    restart: unless-stopped
+    networks:
+    - monitoring
+    - operations_access
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 512m
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    user: 472:472
+    ports:
+    - 127.0.0.1:13000:3000
+    tmpfs:
+    - /tmp:rw,noexec,nosuid,size=32m
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/grafana_password
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+      GF_AUTH_ANONYMOUS_ENABLED: 'false'
+      GF_AUTH_DISABLE_LOGIN_FORM: 'false'
+      GF_ANALYTICS_REPORTING_ENABLED: 'false'
+      GF_ANALYTICS_CHECK_FOR_UPDATES: 'false'
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: 'false'
+      GF_SECURITY_COOKIE_SAMESITE: strict
+      GF_LOG_LEVEL: warn
+    secrets:
+    - grafana_password
+    volumes:
+    - grafana_data:/var/lib/grafana
+    - ./infra/monitoring/grafana:/etc/grafana/provisioning:ro
+    - ./infra/monitoring/dashboards:/var/lib/edu-dashboards:ro
+    depends_on:
+      monitoring-init:
+        condition: service_completed_successfully
+  loki:
+    image: grafana/loki:3.7.7@sha256:d70e4659623f3e109af669cae76fe2a5dd5be54e2298fe8aed380d982fbc2500
+    restart: unless-stopped
+    networks:
+    - monitoring
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 384m
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    user: 10001:10001
+    command:
+    - -config.file=/etc/loki/config.yml
+    volumes:
+    - ./infra/monitoring/loki.yml:/etc/loki/config.yml:ro
+    - loki_data:/loki
+    depends_on:
+      monitoring-init:
+        condition: service_completed_successfully
+  alloy:
+    image: grafana/alloy:v1.19.2@sha256:b8ec653c44235fbe910879145dac3597d66b0aaecf60bcbbe82580767771a839
+    restart: unless-stopped
+    networks:
+    - monitoring
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    user: 10001:10001
+    command:
+    - run
+    - --server.http.listen-addr=0.0.0.0:12345
+    - --storage.path=/data
+    - /etc/alloy/config.alloy
+    volumes:
+    - ./infra/monitoring/config.alloy:/etc/alloy/config.alloy:ro
+    - ./runtime/telemetry:/logs:ro
+    - type: volume
+      source: alloy_data
+      target: /data
+      volume:
+        nocopy: true
+    depends_on:
+      monitoring-init:
+        condition: service_completed_successfully
+  node-exporter:
+    image: prom/node-exporter:v1.12.1@sha256:1b4e4438faca4dd7e001dd445d161a4a2091b0fededa84093b3a8dfeae1f1be0
+    restart: unless-stopped
+    networks:
+    - monitoring
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 128m
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    user: 65534:65534
+    pid: host
+    command:
+    - --path.procfs=/host/proc
+    - --path.sysfs=/host/sys
+    - --path.rootfs=/rootfs
+    - --collector.textfile.directory=/textfile
+    - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+)($$|/)
+    volumes:
+    - /proc:/host/proc:ro
+    - /sys:/host/sys:ro
+    - /:/rootfs:ro,rslave
+    - ./runtime/metrics:/textfile:ro
+  sentry-forwarder:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile
+      target: base
+    command:
+    - python
+    - -m
+    - scripts.sentry_forwarder
+    restart: unless-stopped
+    networks:
+    - telemetry_egress
+    secrets:
+    - sentry_dsn
+    volumes:
+    - ./runtime/telemetry:/logs:ro
+    - sentry_state:/state
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 128m
+    cpus: 0.25
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: '2'
+    depends_on:
+      monitoring-init:
+        condition: service_completed_successfully
+  monitoring-init:
+    image: grafana/alloy:v1.19.2@sha256:b8ec653c44235fbe910879145dac3597d66b0aaecf60bcbbe82580767771a839
+    user: 0:0
+    entrypoint:
+    - /bin/sh
+    - -ec
+    command:
+    - chown 65534:65534 /prometheus; chown 472:472 /grafana; chown 10001:10001 /loki
+      /alloy /state
+    volumes:
+    - prometheus_data:/prometheus
+    - grafana_data:/grafana
+    - loki_data:/loki
+    - alloy_data:/alloy
+    - sentry_state:/state
+    network_mode: none
+    read_only: true
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 64m
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+  loki_data: {}
+  alloy_data: {}
+  sentry_state: {}
+networks:
+  monitoring:
+    internal: true
+  telemetry_egress: {}
+  operations_access: {}
+secrets:
+  grafana_password:
+    file: ./secrets/grafana_password
+  sentry_dsn:
+    file: ./secrets/sentry_dsn

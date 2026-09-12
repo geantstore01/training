@@ -1,0 +1,39 @@
+rule_files:
+  - /etc/prometheus/alerts.yml
+evaluation_interval: 15s
+tests:
+  - interval: 15s
+    input_series:
+      - series: 'up{job="educapilote",service="auth-service",instance="auth-service:8000"}'
+        values: '0+0x20'
+      - series: 'edu_dependency_up{dependency="postgres",service="user-service",instance="user-service:8000"}'
+        values: '0+0x20'
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: ServiceUnavailable
+        exp_alerts:
+          - exp_labels:
+              job: educapilote
+              service: auth-service
+              instance: auth-service:8000
+              severity: critical
+            exp_annotations:
+              summary: Microservice inaccessible
+      - eval_time: 3m
+        alertname: DependencyUnavailable
+        exp_alerts:
+          - exp_labels:
+              dependency: postgres
+              service: user-service
+              instance: user-service:8000
+              severity: critical
+            exp_annotations:
+              summary: PostgreSQL ou Redis indisponible pour un service
+  - interval: 15s
+    input_series:
+      - series: 'up{job="educapilote",service="auth-service"}'
+        values: '1+0x20'
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: ServiceUnavailable
+        exp_alerts: []

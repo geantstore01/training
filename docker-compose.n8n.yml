@@ -1,0 +1,34 @@
+name: educapilote
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.38.6@sha256:daf782b5c992ad239ad02b341d387d0162bcd539f4c88d67be37f8bd6071f878
+    platform: linux/amd64
+    profiles: [automation]
+    restart: unless-stopped
+    ports: ["127.0.0.1:15678:5678"]
+    environment:
+      GENERIC_TIMEZONE: Europe/Paris
+      TZ: Europe/Paris
+      N8N_UNVERIFIED_PACKAGES_ENABLED: "false"
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_PERSONALIZATION_ENABLED: "false"
+      N8N_SECURE_COOKIE: "false"
+      EXECUTIONS_DATA_SAVE_ON_SUCCESS: none
+      EXECUTIONS_DATA_SAVE_ON_ERROR: none
+      EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS: "false"
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./workflows/n8n:/workflows:ro
+    networks: [backend, n8n_ui]
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    mem_limit: 1536m
+    cpus: 1.0
+volumes:
+  n8n_data: {}
+networks:
+  backend:
+    external: true
+    name: educapilote_backend
+  n8n_ui: {}

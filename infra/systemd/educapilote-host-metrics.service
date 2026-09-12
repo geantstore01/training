@@ -1,0 +1,10 @@
+[Unit]
+Description=Educapilote aggregate GPU telemetry
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /stockage/training/scripts/host_metrics.py
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/stockage/training/runtime/metrics /stockage/training/runtime/telemetry
+PrivateTmp=true

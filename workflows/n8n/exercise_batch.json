@@ -1,0 +1,78 @@
+{
+  "id": "a9d42e5523e24200",
+  "name": "ÉDUCAPILOTE — exercise_batch",
+  "active": false,
+  "nodes": [
+    {
+      "id": "45566778-2d5a-4e9c-9c3f-93985c5de4f1",
+      "name": "Webhook authentifié",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        200
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "educapilote-exercise_batch",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "educapilote-inbound",
+          "name": "Educapilote webhook entrant"
+        }
+      }
+    },
+    {
+      "id": "6f22a64f-7b9a-4b43-8d33-3df69d44f7b8",
+      "name": "Soumettre tâche",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        300,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://notification-service:8000/automation/jobs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {kind: 'exercise_batch', idempotency_key: $json.body.idempotency_key, generations: $json.body.generations} }}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "educapilote-outbound",
+          "name": "Educapilote automatisation établissement"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook authentifié": {
+      "main": [
+        [
+          {
+            "node": "Soumettre tâche",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "saveDataSuccessExecution": "none",
+    "saveDataErrorExecution": "none",
+    "saveManualExecutions": false
+  }
+}
