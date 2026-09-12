@@ -514,3 +514,11 @@ Déploiement : `docker compose -f docker-compose.dev.yml build web` puis `up -d 
 - globals.css : règles .login-path/.login-photo retirées, règles .login-cartouches/.login-cartouche ajoutées ; à ≤760 px la bande est masquée comme avant (login-foot inclus).
 - Sauvegardes : manual/2026-09-12-cartouches-login (page.tsx, globals.css) + chiffrée 20260912T192955Z-73101.
 - Vérifs : typecheck OK ; vitest 17/17 ; /connexion 200 avec 3 .login-cartouche et les 3 images ; assets 200 ; plus aucune classe login-path/login-photo servie ; https://boostclasse.com/connexion 200.
+
+### 2026-09-12 (12) — Bannière élève retirée de /eleve (déplacée vers la connexion)
+- Demande utilisateur : la bannière Minecraft devait être DÉPLACÉE vers /connexion (3 cartouches, deploy 11), pas copiée — la retirer de /eleve.
+- student.tsx : <BannerEleve/> retiré du rendu, import supprimé, hook useApi("class/missions/today") retiré (il ne servait que au badge de la bannière). La barre du haut (Shell) assure déjà « Mes missions », « Quitter » et les outils.
+- components/banner-eleve.tsx supprimé (git le conserve). globals.css : bloc bannière (commentaire + règles .banner-eleve/.be-* + media queries associées) et .banner-eleve:first-child retirés.
+- L image /banner-eleve.webp reste dans public/ : utilisée par la cartouche de /connexion.
+- Sauvegardes : manual/2026-09-12-retrait-banniere-eleve (student.tsx, banner-eleve.tsx, globals.css) + chiffrée 20260912T203850Z-443396.
+- Vérifs : typecheck OK ; vitest 17/17 ; 0 chunk/CSS servi ne contient be-slogan/be-character/BannerEleve ; banner-eleve.webp référencé uniquement par le chunk connexion ; /connexion 200 local et public.
